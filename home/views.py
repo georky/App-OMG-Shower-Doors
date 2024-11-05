@@ -291,6 +291,7 @@ def product_page(request):
   return render(request, 'pages/ecommerce/products/product-page.html', context)
 
 def products_list(request):
+  
   context = {
     'parent': 'ecommerce',
     'sub_parent': 'products',

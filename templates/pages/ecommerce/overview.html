@@ -41,19 +41,37 @@
     max-width: 150px; /* Ajusta el ancho según el espacio que desees */
   }
   .avatar3d {
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
   margin-right: 5px;
   object-fit: cover;
-  transition: transform 0.3s, box-shadow 0.3s;
-  /* Sombra inicial para el efecto 3D */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.5s ease, box-shadow 0.5s ease, filter 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  perspective: 1000px;
 }
 
 /* Efecto cuando el usuario pasa el ratón sobre la imagen */
+/* Efecto al hacer hover */
 .avatar3d:hover {
-  transform: perspective(600px) rotateY(15deg) scale(1.1);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  transform: perspective(600px) rotateY(20deg) rotateX(10deg) scale(1.1) translateZ(10px);
+  box-shadow: 0 12px 24px #00000066;
+  animation: float 3s ease-in-out infinite; /* Añade una animación de flotación */
+}
+/* Efecto de selección */
+.avatar3d.selected {
+  filter: hue-rotate(200deg) brightness(1.2);
+}
+/* Efecto flotante continuo */
+@keyframes float {
+  0% {
+    transform: perspective(600px) translateY(0px);
+  }
+  50% {
+    transform: perspective(600px) translateY(-10px) rotateY(20deg) rotateX(10deg);
+  }
+  100% {
+    transform: perspective(600px) translateY(0px);
+  }
 }
 </style>
   <div class="container-fluid py-4">
@@ -68,19 +86,19 @@
               <div class="d-flex p-2 align-items-center">
                 <!-- Contenedor de cada imagen con su nombre -->
                 <div class="text-center me-2">
-                  <img alt="Image" src="{% static 'assets/img/1.jpg' %}" class="avatar shadow">
+                  <img alt="Image" src="{% static 'assets/img/1.jpg' %}" class="avatar3d shadow">
                   <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
                     Inline
                   </span>
                 </div>
                 <div class="text-center me-2">
-                  <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar shadow">
+                  <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
                   <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
                     Right Angle
                   </span>
                 </div>
                 <div class="text-center">
-                  <img alt="Image" src="{% static 'assets/img/3.jpg' %}" class="avatar shadow">
+                  <img alt="Image" src="{% static 'assets/img/3.jpg' %}" class="avatar3d shadow">
                   <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
                     Neo
                   </span>
@@ -94,19 +112,19 @@
               <div class="d-flex p-2 align-items-center">
                 <!-- Contenedor de cada imagen con su nombre -->
                 <div class="text-center me-2">
-                  <img alt="Image" src="{% static 'assets/img/1.jpg' %}" class="avatar shadow">
+                  <img alt="Image" src="{% static 'assets/img/1.jpg' %}" class="avatar3d shadow">
                   <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
                     Inline
                   </span>
                 </div>
                 <div class="text-center me-2">
-                  <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar shadow">
+                  <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
                   <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
                     Right Angle
                   </span>
                 </div>
                 <div class="text-center">
-                  <img alt="Image" src="{% static 'assets/img/3.jpg' %}" class="avatar shadow">
+                  <img alt="Image" src="{% static 'assets/img/3.jpg' %}" class="avatar3d shadow">
                   <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
                     Neo
                   </span>
@@ -117,13 +135,13 @@
               <div class="d-flex p-2 align-items-center">
                 <!-- Contenedor de cada imagen con su nombre -->
                 <div class="text-center me-2">
-                  <img alt="Image" src="{% static 'assets/img/1.jpg' %}" class="avatar shadow">
+                  <img alt="Image" src="{% static 'assets/img/1.jpg' %}" class="avatar3d shadow">
                   <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
                     Inline
                   </span>
                 </div>
                 <div class="text-center me-2">
-                  <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar shadow">
+                  <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
                   <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
                     Right Angle
                   </span>
@@ -137,13 +155,13 @@
               <div class="d-flex p-2 align-items-center">
                 <!-- Contenedor de cada imagen con su nombre -->
                 <div class="text-center me-2">
-                  <img alt="Image" src="{% static 'assets/img/1.jpg' %}" class="avatar shadow">
+                  <img alt="Image" src="{% static 'assets/img/1.jpg' %}" class="avatar3d shadow">
                   <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
                     Inline
                   </span>
                 </div>
                 <div class="text-center me-2">
-                  <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar shadow">
+                  <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
                   <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
                     Right Angle
                   </span>
@@ -163,7 +181,7 @@
                 <div class="d-flex p-2 align-items-center">
                   <!-- Contenedor de cada imagen con su nombre -->
                   <div class="text-center me-2">
-                    <img alt="Image" src="{% static 'assets/img/1.jpg' %}" class="avatar3d shadow">
+                    <img alt="Image" src="{% static 'assets/img/3.jpg' %}" class="avatar3d shadow">
                   </div>
                   <div class="text-center me-2">
                     <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
@@ -242,6 +260,13 @@
     {% include 'includes/footer.html' %}
     
   </div>
-
+  <script>
+    // Selecciona todas las imágenes con la clase avatar3d
+    document.querySelectorAll('.avatar3d').forEach((img) => {
+      img.addEventListener('click', () => {
+        // Alterna la clase 'selected' en la imagen que fue clickeada
+        img.classList.toggle('selected');
+      });
+    });
+    </script>
 {% endblock content %}
-  

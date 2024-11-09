@@ -3,7 +3,11 @@
 
 {% block content %}
 <style>
-  .custom-link {
+
+.nav-link.active svg .color-background {
+    fill: #CB0C9F; /* Color de los íconos SVG cuando están activos */
+}
+  .custom-link { 
     text-decoration: none;
     color: inherit;
   }
@@ -72,201 +76,350 @@
   100% {
     transform: perspective(600px) translateY(0px);
   }
+  
 }
 </style>
-  <div class="container-fluid py-4">
-    <div class="row">
-      <div class="col-4">
-        <div class="card blur shadow-blur max-height-vh-70 overflow-auto overflow-x-hidden mb-5 mb-lg-0">
-          <div class="card-header p-3">
-            <h6>Type</h6>
-          </div>
-          <div class="card-body p-2">
-            <a href="javascript:;" class="custom-link d-block p-2">
-              <div class="d-flex p-2 align-items-center">
-                <!-- Contenedor de cada imagen con su nombre -->
-                <div class="text-center me-2">
-                  <img alt="Image" src="{% static 'assets/img/1.jpg' %}" class="avatar3d shadow">
-                  <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
-                    Inline
-                  </span>
-                </div>
-                <div class="text-center me-2">
-                  <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-                  <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
-                    Right Angle
-                  </span>
-                </div>
-                <div class="text-center">
-                  <img alt="Image" src="{% static 'assets/img/3.jpg' %}" class="avatar3d shadow">
-                  <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
-                    Neo
-                  </span>
-                </div>
-              </div>
-            </a>
+<div class="container mt-4">
+  <!-- Barra de navegación con pestañas -->
+  <div class="nav-wrapper position-relative end-0">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="invoice-tab" data-bs-toggle="tab" href="#invoice" role="tab" aria-controls="invoice" aria-selected="true">Invoice</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="project-list-tab" data-bs-toggle="tab" href="#project-list" role="tab" aria-controls="project-list" aria-selected="false">Project List</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="settings-tab" data-bs-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">Settings</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Contenido de cada pestaña -->
+  <div class="tab-content mt-3" id="myTabContent">
+    <!-- Contenido de la pestaña "Invoice" -->
+    <div class="container-fluid py-4 tab-pane fade show active" id="invoice" role="tabpanel" aria-labelledby="invoice-tab">
+      <div class="row" >
+        <div class="col-4">
+          <div class="card blur shadow-blur max-height-vh-70 overflow-auto overflow-x-hidden mb-5 mb-lg-0">
             <div class="card-header p-3">
-              <h6>Doors</h6>
+              <h6>Type</h6>
             </div>
-            <a href="javascript:;" class="custom-link d-block p-2">
-              <div class="d-flex p-2 align-items-center">
-                <!-- Contenedor de cada imagen con su nombre -->
-                <div class="text-center me-2">
-                  <img alt="Image" src="{% static 'assets/img/1.jpg' %}" class="avatar3d shadow">
-                  <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
-                    Inline
-                  </span>
+            <div class="card-body p-2">
+              <a href="javascript:;" class="custom-link d-block p-2">
+                <div class="d-flex p-2 align-items-center">
+                  <!-- Contenedor de cada imagen con su nombre -->
+                  <div class="text-center me-2">
+                    <img alt="Image" src="{% static 'assets/img/1.jpg' %}" class="avatar3d shadow">
+                    <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
+                      Inline
+                    </span>
+                  </div>
+                  <div class="text-center me-2">
+                    <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
+                    <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
+                      Right Angle
+                    </span>
+                  </div>
+                  <div class="text-center">
+                    <img alt="Image" src="{% static 'assets/img/3.jpg' %}" class="avatar3d shadow">
+                    <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
+                      Neo
+                    </span>
+                  </div>
                 </div>
-                <div class="text-center me-2">
-                  <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-                  <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
-                    Right Angle
-                  </span>
-                </div>
-                <div class="text-center">
-                  <img alt="Image" src="{% static 'assets/img/3.jpg' %}" class="avatar3d shadow">
-                  <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
-                    Neo
-                  </span>
-                </div>
+              </a>
+              <div class="card-header p-3">
+                <h6>Doors</h6>
               </div>
-            </a>
-            <a href="javascript:;" class="custom-link d-block p-2">
-              <div class="d-flex p-2 align-items-center">
-                <!-- Contenedor de cada imagen con su nombre -->
-                <div class="text-center me-2">
-                  <img alt="Image" src="{% static 'assets/img/1.jpg' %}" class="avatar3d shadow">
-                  <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
-                    Inline
-                  </span>
+              <a href="javascript:;" class="custom-link d-block p-2">
+                <div class="d-flex p-2 align-items-center">
+                  <!-- Contenedor de cada imagen con su nombre -->
+                  <div class="text-center me-2">
+                    <img alt="Image" src="{% static 'assets/img/1.jpg' %}" class="avatar3d shadow">
+                    <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
+                      Inline
+                    </span>
+                  </div>
+                  <div class="text-center me-2">
+                    <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
+                    <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
+                      Right Angle
+                    </span>
+                  </div>
+                  <div class="text-center">
+                    <img alt="Image" src="{% static 'assets/img/3.jpg' %}" class="avatar3d shadow">
+                    <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
+                      Neo
+                    </span>
+                  </div>
                 </div>
-                <div class="text-center me-2">
-                  <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-                  <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
-                    Right Angle
-                  </span>
+              </a>
+              <a href="javascript:;" class="custom-link d-block p-2">
+                <div class="d-flex p-2 align-items-center">
+                  <!-- Contenedor de cada imagen con su nombre -->
+                  <div class="text-center me-2">
+                    <img alt="Image" src="{% static 'assets/img/1.jpg' %}" class="avatar3d shadow">
+                    <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
+                      Inline
+                    </span>
+                  </div>
+                  <div class="text-center me-2">
+                    <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
+                    <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
+                      Right Angle
+                    </span>
+                  </div>
                 </div>
+              </a>
+              <div class="card-header p-3">
+                <h6>Hinges</h6>
               </div>
-            </a>
-            <div class="card-header p-3">
-              <h6>Hinges</h6>
+              <a href="javascript:;" class="custom-link d-block p-2">
+                <div class="d-flex p-2 align-items-center">
+                  <!-- Contenedor de cada imagen con su nombre -->
+                  <div class="text-center me-2">
+                    <img alt="Image" src="{% static 'assets/img/1.jpg' %}" class="avatar3d shadow">
+                    <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
+                      Inline
+                    </span>
+                  </div>
+                  <div class="text-center me-2">
+                    <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
+                    <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
+                      Right Angle
+                    </span>
+                  </div>
+                </div>
+              </a>
             </div>
-            <a href="javascript:;" class="custom-link d-block p-2">
-              <div class="d-flex p-2 align-items-center">
-                <!-- Contenedor de cada imagen con su nombre -->
-                <div class="text-center me-2">
-                  <img alt="Image" src="{% static 'assets/img/1.jpg' %}" class="avatar3d shadow">
-                  <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
-                    Inline
-                  </span>
-                </div>
-                <div class="text-center me-2">
-                  <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-                  <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
-                    Right Angle
-                  </span>
-                </div>
-              </div>
-            </a>
           </div>
         </div>
-      </div>
-
-      <!-- Contenedor de la otra Card -->
-      <div class="col-8">
-        <div class="card blur shadow-blur max-height-vh-70">
-          <div class="card-body overflow-auto overflow-x-hidden">
-            <div class="row justify-content-start mb-4">
-              <a href="javascript:;" class="custom-link d-block p-2">
-                <div class="d-flex p-2 align-items-center">
-                  <!-- Contenedor de cada imagen con su nombre -->
-                  <div class="text-center me-2">
-                    <img alt="Image" src="{% static 'assets/img/3.jpg' %}" class="avatar3d shadow">
+  
+        <!-- Contenedor de la otra Card -->
+        <div class="col-8">
+          <div class="card blur shadow-blur max-height-vh-70">
+            <div class="card-body overflow-auto overflow-x-hidden">
+              <div class="row justify-content-start mb-4">
+                <a href="javascript:;" class="custom-link d-block p-2">
+                  <div class="d-flex p-2 align-items-center">
+                    <!-- Contenedor de cada imagen con su nombre -->
+                    <div class="text-center me-2">
+                      <img alt="Image" src="{% static 'assets/img/3.jpg' %}" class="avatar3d shadow">
+                    </div>
+                    <div class="text-center me-2">
+                      <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
+                    </div>
+                    <div class="text-center me-2">
+                      <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
+                    </div>
+                    <div class="text-center me-2">
+                      <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
+                    </div>
+                    <div class="text-center me-2">
+                      <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
+                    </div>
                   </div>
-                  <div class="text-center me-2">
-                    <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
+                </a>
+              </div>
+              <div class="row justify-content-start mb-4">
+                <a href="javascript:;" class="custom-link d-block p-2">
+                  <div class="d-flex p-2 align-items-center">
+                    <!-- Contenedor de cada imagen con su nombre -->
+                    <div class="text-center me-2">
+                      <img alt="Image" src="{% static 'assets/img/1.jpg' %}" class="avatar3d shadow">
+                      
+                    </div>
+                    <div class="text-center me-2">
+                      <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
+                      
+                    </div>
+                    <div class="text-center me-2">
+                      <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
+                      
+                    </div>
+                    <div class="text-center me-2">
+                      <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
+                      
+                    </div>
+                    <div class="text-center me-2">
+                      <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
+                      
+                    </div>
                   </div>
-                  <div class="text-center me-2">
-                    <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
+                </a>
+              </div>
+              <div class="row justify-content-start mb-4">
+                <a href="javascript:;" class="custom-link d-block p-2">
+                  <div class="d-flex p-2 align-items-center">
+                    <!-- Contenedor de cada imagen con su nombre -->
+                    <div class="text-center me-2">
+                      <img alt="Image" src="{% static 'assets/img/1.jpg' %}" class="avatar3d shadow">
+                      
+                    </div>
+                    <div class="text-center me-2">
+                      <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
+                      
+                    </div>
+                    <div class="text-center me-2">
+                      <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
+                     
+                    </div>
+                    <div class="text-center me-2">
+                      <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
+                      
+                    </div>
+                    <div class="text-center me-2">
+                      <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
+                      
+                    </div>
                   </div>
-                  <div class="text-center me-2">
-                    <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-                  </div>
-                  <div class="text-center me-2">
-                    <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="row justify-content-start mb-4">
-              <a href="javascript:;" class="custom-link d-block p-2">
-                <div class="d-flex p-2 align-items-center">
-                  <!-- Contenedor de cada imagen con su nombre -->
-                  <div class="text-center me-2">
-                    <img alt="Image" src="{% static 'assets/img/1.jpg' %}" class="avatar3d shadow">
-                    
-                  </div>
-                  <div class="text-center me-2">
-                    <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-                    
-                  </div>
-                  <div class="text-center me-2">
-                    <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-                    
-                  </div>
-                  <div class="text-center me-2">
-                    <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-                    
-                  </div>
-                  <div class="text-center me-2">
-                    <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-                    
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="row justify-content-start mb-4">
-              <a href="javascript:;" class="custom-link d-block p-2">
-                <div class="d-flex p-2 align-items-center">
-                  <!-- Contenedor de cada imagen con su nombre -->
-                  <div class="text-center me-2">
-                    <img alt="Image" src="{% static 'assets/img/1.jpg' %}" class="avatar3d shadow">
-                    
-                  </div>
-                  <div class="text-center me-2">
-                    <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-                    
-                  </div>
-                  <div class="text-center me-2">
-                    <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-                   
-                  </div>
-                  <div class="text-center me-2">
-                    <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-                    
-                  </div>
-                  <div class="text-center me-2">
-                    <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-                    
-                  </div>
-                </div>
-              </a>
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    {% include 'includes/footer.html' %}
-    
+    <!-- Contenido de la pestaña "Project List" -->
+    <div class="container-fluid my-3 py-3 tab-pane fade" id="project-list" role="tabpanel" aria-labelledby="project-list-tab">
+      <div class="row">
+        <div class="col-md-8 col-sm-10 mx-auto">
+          <form class="" action="index.html" method="post">
+            <div class="card my-sm-5">
+              <div class="card-header text-center">
+                <div class="row justify-content-between">
+                  <div class="navbar-brand m-0">
+                    <img class="mb-2 w-25 p-2" src="{% static 'assets/img/imagen_01.png' %}" alt="Logo">
+                    <h6>
+                      St. Independence Embankment, 050105 Bucharest, Romania
+                    </h6>
+                    <p class="d-block text-secondary">tel: +4 (074) 1090873</p>
+                  </div>
+                  <div class="col-lg-3 col-md-7 text-md-end text-start mt-5">
+                    <h6 class="d-block mt-2 mb-0">Billed to: John Doe</h6>
+                    <input type="text">
+                    <p class="text-secondary">4006 Locust View Drive<br>
+                      San Francisco CA<br>
+                      California
+                    </p>
+                  </div>
+                </div>
+                <br>
+                <div class="row justify-content-md-between">
+                  <div class="col-md-4 mt-auto">
+                    <h6 class="mb-0 text-start text-secondary">
+                      Invoice no
+                    </h6>
+                    <h5 class="text-start mb-0">
+                      #0453119
+                    </h5>
+                  </div>
+                  <div class="col-lg-5 col-md-7 mt-auto">
+                    <div class="row mt-md-5 mt-4 text-md-end text-start">
+                      <div class="col-md-6">
+                        <h6 class="text-secondary mb-0">Invoice date:</h6>
+                      </div>
+                      <div class="col-md-6">
+                        <h6 class="text-dark mb-0">06/03/2019</h6>
+                      </div>
+                    </div>
+                    <div class="row text-md-end text-start">
+                      <div class="col-md-6">
+                        <h6 class="text-secondary mb-0">Due date:</h6>
+                      </div>
+                      <div class="col-md-6">
+                        <h6 class="text-dark mb-0">11/03/2019</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="table-responsive">
+                      <table class="table text-right">
+                        <thead class="bg-default">
+                          <tr>
+                            <th scope="col" class="pe-2 text-start ps-2">Item</th>
+                            <th scope="col" class="pe-2">Qty</th>
+                            <th scope="col" class="pe-2" colspan="2">Rate</th>
+                            <th scope="col" class="pe-2">Amount</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td class="text-start">Premium Support</td>
+                            <td class="ps-4">1</td>
+                            <td class="ps-4" colspan="2">$ 9.00</td>
+                            <td class="ps-4">$ 9.00</td>
+                          </tr>
+                          <tr>
+                            <td class="text-start">Soft UI Design System PRO</td>
+                            <td class="ps-4">3</td>
+                            <td class="ps-4" colspan="2">$ 100.00</td>
+                            <td class="ps-4">$ 300.00</td>
+                          </tr>
+                          <tr>
+                            <td class="text-start">Parts for service</td>
+                            <td class="ps-4">1</td>
+                            <td class="ps-4" colspan="2">$ 89.00</td>
+                            <td class="ps-4">$ 89.00</td>
+                          </tr>
+                        </tbody>
+                        <tfoot>
+                          <tr>
+                            <th></th>
+                            <th></th>
+                            <th class="h5 ps-4" colspan="2">Total</th>
+                            <th colspan="1" class="text-right h5 ps-4">$ 698</th>
+                          </tr>
+                        </tfoot>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer mt-md-5 mt-4">
+                <div class="row">
+                  <div class="col-lg-5 text-left">
+                    <h5>Thank you!</h5>
+                    <p class="text-secondary text-sm">If you encounter any issues related to the invoice you can contact us at:</p>
+                    <h6 class="text-secondary mb-0">
+                      email:
+                      <span class="text-dark">support@creative-tim.com</span>
+                    </h6>
+                  </div>
+                  <div class="col-lg-7 text-md-end mt-md-0 mt-3">
+                    <button class="btn bg-gradient-info mt-lg-7 mb-0" onClick="window.print()" type="button" name="button">Print</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenido de la pestaña "Settings" -->
+    <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+      <h3>Settings</h3>
+      <p>Contenido relacionado con Settings.</p>
+    </div>
   </div>
-  <script>
-    // Selecciona todas las imágenes con la clase avatar3d
-    document.querySelectorAll('.avatar3d').forEach((img) => {
-      img.addEventListener('click', () => {
-        // Alterna la clase 'selected' en la imagen que fue clickeada
-        img.classList.toggle('selected');
-      });
+  {% include 'includes/footer.html' %}
+
+</div>
+
+<script>
+  // Selecciona todas las imágenes con la clase avatar3d
+  document.querySelectorAll('.avatar3d').forEach((img) => {
+    img.addEventListener('click', () => {
+      // Alterna la clase 'selected' en la imagen que fue clickeada
+      img.classList.toggle('selected');
     });
-    </script>
+  });
+  </script>
 {% endblock content %}

@@ -45,7 +45,7 @@ urlpatterns = [
   path('applications/datatables/', views.datatables, name="datatables"),
   path('applications/calendar/', views.calendar, name="calendar"),
   path('applications/analytics/', views.analytics, name="analytics"),
-
+  
   # Ecommerce
   path('ecommerce/overview/', views.overview, name="overview"),
   path('ecommerce/referral/', views.referral, name="referral"),

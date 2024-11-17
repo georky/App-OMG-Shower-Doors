@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordChangeView, PasswordResetConfirmView
 from home.forms import RegistrationForm, LoginForm, UserPasswordResetForm, UserSetPasswordForm, UserPasswordChangeForm
@@ -5,7 +6,8 @@ from django.contrib.auth import logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
-
+from wkhtmltopdf.views import PDFTemplateView
+from django.templatetags.static import static
 def index(request):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
@@ -157,7 +159,7 @@ def new_user(request):
   return render(request, 'pages/users/new-user.html', context)
 
 # Pages -> Accounts
-def settings(request):
+def settings_1(request):
   context = {
     'parent': 'pages',
     'sub_parent': 'accounts',
@@ -430,6 +432,23 @@ def i18n_view(request):
   }
   return render(request, 'pages/apps/i18n.html', context)
 
+# views.py
 
 
+class MyPDFView(PDFTemplateView):
+    template_name = 'pages/ecommerce/overview1.html'
+    cmd_options = {
+        'enable-local-file-access': True,
+        'orientation': 'Portrait',
+        'page-size': 'A4',
+        'encoding': 'UTF-8',
+        'quiet': False,  # Elimina el --quiet para ver más detalles del error
+    }
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['STATIC_URL'] = settings.STATIC_URL
+        context['img1_url'] = static('assets/img/3.jpg')
+        context['img2_url'] = static('assets/img/5.jpg')
+        return context
 

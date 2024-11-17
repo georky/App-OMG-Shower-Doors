@@ -1,7 +1,7 @@
 from django.urls import path
 from home import views
 from django.contrib.auth import views as auth_views
-
+from .views import MyPDFView
 
 urlpatterns = [
   # Dashboard
@@ -30,7 +30,7 @@ urlpatterns = [
   path('pages/users/reports/', views.reports, name="reports"),
   path('pages/users/new-user/', views.new_user, name="new_user"),
   # Pages -> Accounts
-  path('pages/accounts/settings/', views.settings, name="settings"),
+  path('pages/accounts/settings/', views.settings_1, name="settings"),
   path('pages/accounts/billing/', views.billing, name="billing"),
   path('pages/accounts/invoice/', views.invoice, name="invoice"),
   path('pages/accounts/security/', views.security, name="security"),
@@ -96,4 +96,7 @@ urlpatterns = [
   path('error/404/', views.error_404, name="error_404"),
   path('error/500/', views.error_500, name="error_500"),
   path('logout/', views.logout_view, name="logout"),
+
+  #PDF
+ path('ecommerce/generate-pdf/', MyPDFView.as_view(), name='generate_pdf'),
 ]

@@ -2,34 +2,79 @@
 {% load static %}
 
 {% block content %}
-<style>
 
-.nav-link.active svg .color-background {
-    fill: #CB0C9F; /* Color de los íconos SVG cuando están activos */
-}
-  .custom-link { 
+<style>
+  .info-table,
+  .details-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+
+  .info-table td,
+  .details-table td,
+  .details-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+  .info-table td {
+    width: 50%;
+  }
+
+  .details-table th {
+    background-color: #f2f2f2;
+  }
+
+  .nav-link.active svg .color-background {
+    fill: #CB0C9F;
+    /* Color de los íconos SVG cuando están activos */
+  }
+
+  input[type="text"],
+  input[type="email"] {
+    box-sizing: border-box;
+    padding: 5px;
+    font-size: 14px;
+    margin-top: 2px;
+    border: none;
+    /* Sin borde */
+    outline: none;
+    /* También quita el borde cuando el input está seleccionado */
+    background-color: transparent;
+    /* Fondo transparente */
+  }
+
+  .custom-link {
     text-decoration: none;
     color: inherit;
   }
 
   .custom-link:hover {
-    background-color: hsl(0, 0%, 94%); /* Cambia el fondo al pasar el ratón */
-    border-radius: 10px; /* Bordes redondeados */
+    background-color: hsl(0, 0%, 94%);
+    /* Cambia el fondo al pasar el ratón */
+    border-radius: 10px;
+    /* Bordes redondeados */
   }
 
   .avatar {
     width: 100px;
     height: 100px;
-    margin-right: 5px; /* Espacio entre las imágenes */
-    object-fit: cover; /* Asegura que las imágenes mantengan su proporción */
-   
+    margin-right: 5px;
+    /* Espacio entre las imágenes */
+    object-fit: cover;
+    /* Asegura que las imágenes mantengan su proporción */
+
   }
+
   .avatar1 {
     width: 150px;
     height: 150px;
-    margin-right: 5px; /* Espacio entre las imágenes */
-    object-fit: cover; /* Asegura que las imágenes mantengan su proporción */
-   
+    margin-right: 5px;
+    /* Espacio entre las imágenes */
+    object-fit: cover;
+    /* Asegura que las imágenes mantengan su proporción */
+
   }
 
   .content-info {
@@ -42,64 +87,86 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 150px; /* Ajusta el ancho según el espacio que desees */
+    max-width: 150px;
+    /* Ajusta el ancho según el espacio que desees */
   }
-  .avatar3d {
-  width: 100px;
-  height: 100px;
-  margin-right: 5px;
-  object-fit: cover;
-  transition: transform 0.5s ease, box-shadow 0.5s ease, filter 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  perspective: 1000px;
-}
 
-/* Efecto cuando el usuario pasa el ratón sobre la imagen */
-/* Efecto al hacer hover */
-.avatar3d:hover {
-  transform: perspective(600px) rotateY(20deg) rotateX(10deg) scale(1.1) translateZ(10px);
-  box-shadow: 0 12px 24px #00000066;
-  animation: float 3s ease-in-out infinite; /* Añade una animación de flotación */
-}
-/* Efecto de selección */
-.avatar3d.selected {
-  filter: hue-rotate(200deg) brightness(1.2);
-}
-/* Efecto flotante continuo */
-@keyframes float {
-  0% {
-    transform: perspective(600px) translateY(0px);
+  .avatar3d {
+    width: 100px;
+    height: 100px;
+    margin-right: 5px;
+    object-fit: cover;
+    transition: transform 0.5s ease, box-shadow 0.5s ease, filter 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    perspective: 1000px;
   }
-  50% {
-    transform: perspective(600px) translateY(-10px) rotateY(20deg) rotateX(10deg);
+
+  /* Efecto cuando el usuario pasa el ratón sobre la imagen */
+  /* Efecto al hacer hover */
+  .avatar3d:hover {
+    transform: perspective(600px) rotateY(20deg) rotateX(10deg) scale(1.1) translateZ(10px);
+    box-shadow: 0 12px 24px #00000066;
+    animation: float 3s ease-in-out infinite;
+    /* Añade una animación de flotación */
   }
-  100% {
-    transform: perspective(600px) translateY(0px);
+
+  /* Efecto de selección */
+  .avatar3d.selected {
+    filter: hue-rotate(200deg) brightness(1.2);
   }
-  
-}
+
+  /* Efecto flotante continuo */
+  @keyframes float {
+    0% {
+      transform: perspective(600px) translateY(0px);
+    }
+
+    50% {
+      transform: perspective(600px) translateY(-10px) rotateY(20deg) rotateX(10deg);
+    }
+
+    100% {
+      transform: perspective(600px) translateY(0px);
+    }
+
+  }
 </style>
 <div class="container mt-4">
   <!-- Barra de navegación con pestañas -->
-  <div class="nav-wrapper position-relative end-0">
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-      <li class="nav-item" role="presentation">
-        <a class="nav-link active" id="invoice-tab" data-bs-toggle="tab" href="#invoice" role="tab" aria-controls="invoice" aria-selected="true">Invoice</a>
-      </li>
-      <li class="nav-item" role="presentation">
-        <a class="nav-link" id="project-list-tab" data-bs-toggle="tab" href="#project-list" role="tab" aria-controls="project-list" aria-selected="false">Project List</a>
-      </li>
-      <li class="nav-item" role="presentation">
-        <a class="nav-link" id="settings-tab" data-bs-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">Settings</a>
-      </li>
-    </ul>
+  <div class="container-fluid mt-4">
+    <div class="row align-items-center">
+      <div class="col-lg-4 col-sm-8">
+        <div class="nav-wrapper position-relative end-0">
+          <ul class="nav nav-pills nav-fill p-1" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link mb-0 px-0 py-1 active  active " data-bs-toggle="tab" href="#invoice" role="tab"
+                aria-selected="true">
+                Messages
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="#project-list" role="tab"
+                aria-selected="false">
+                Social
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="#settings" role="tab"
+                aria-selected="false">
+                Notifications
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
-
   <!-- Contenido de cada pestaña -->
   <div class="tab-content mt-3" id="myTabContent">
     <!-- Contenido de la pestaña "Invoice" -->
-    <div class="container-fluid py-4 tab-pane fade show active" id="invoice" role="tabpanel" aria-labelledby="invoice-tab">
-      <div class="row" >
+    <div class="container-fluid py-4 tab-pane fade show active" id="invoice" role="tabpanel"
+      aria-labelledby="invoice-tab">
+      <div class="row">
         <div class="col-4">
           <div class="card blur shadow-blur max-height-vh-70 overflow-auto overflow-x-hidden mb-5 mb-lg-0">
             <div class="card-header p-3">
@@ -195,7 +262,7 @@
             </div>
           </div>
         </div>
-  
+
         <!-- Contenedor de la otra Card -->
         <div class="col-8">
           <div class="card blur shadow-blur max-height-vh-70">
@@ -228,23 +295,23 @@
                     <!-- Contenedor de cada imagen con su nombre -->
                     <div class="text-center me-2">
                       <img alt="Image" src="{% static 'assets/img/1.jpg' %}" class="avatar3d shadow">
-                      
+
                     </div>
                     <div class="text-center me-2">
                       <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-                      
+
                     </div>
                     <div class="text-center me-2">
                       <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-                      
+
                     </div>
                     <div class="text-center me-2">
                       <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-                      
+
                     </div>
                     <div class="text-center me-2">
                       <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-                      
+
                     </div>
                   </div>
                 </a>
@@ -255,23 +322,23 @@
                     <!-- Contenedor de cada imagen con su nombre -->
                     <div class="text-center me-2">
                       <img alt="Image" src="{% static 'assets/img/1.jpg' %}" class="avatar3d shadow">
-                      
+
                     </div>
                     <div class="text-center me-2">
                       <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-                      
+
                     </div>
                     <div class="text-center me-2">
                       <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-                     
+
                     </div>
                     <div class="text-center me-2">
                       <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-                      
+
                     </div>
                     <div class="text-center me-2">
                       <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-                      
+
                     </div>
                   </div>
                 </a>
@@ -283,121 +350,175 @@
     </div>
 
     <!-- Contenido de la pestaña "Project List" -->
-    <div class="container-fluid my-3 py-3 tab-pane fade" id="project-list" role="tabpanel" aria-labelledby="project-list-tab">
+    <div class="container-fluid my-3 py-3 tab-pane fade" id="project-list" role="tabpanel"
+      aria-labelledby="project-list-tab">
       <div class="row">
         <div class="col-md-8 col-sm-10 mx-auto">
-          <form class="" action="index.html" method="post">
+          <form class="" action="{% url 'generate_pdf' %}" method="get">
+            {% csrf_token %}
             <div class="card my-sm-5">
               <div class="card-header text-center">
                 <div class="row justify-content-between">
                   <div class="navbar-brand m-0">
                     <img class="mb-2 w-25 p-2" src="{% static 'assets/img/imagen_01.png' %}" alt="Logo">
                     <h6>
-                      St. Independence Embankment, 050105 Bucharest, Romania
+                      S89 Montauk Hwy.
+                      Copiague NY 11726
                     </h6>
-                    <p class="d-block text-secondary">tel: +4 (074) 1090873</p>
-                  </div>
-                  <div class="col-lg-3 col-md-7 text-md-end text-start mt-5">
-                    <h6 class="d-block mt-2 mb-0">Billed to: John Doe</h6>
-                    <input type="text">
-                    <p class="text-secondary">4006 Locust View Drive<br>
-                      San Francisco CA<br>
-                      California
-                    </p>
+                    <p class="d-block text-secondary">tel: 631-842-2515 631-842-2780 fx</p>
+                    <p class="d-block text-secondary">www.omgshowerdoors.com</p>
                   </div>
                 </div>
-                <br>
-                <div class="row justify-content-md-between">
-                  <div class="col-md-4 mt-auto">
-                    <h6 class="mb-0 text-start text-secondary">
-                      Invoice no
-                    </h6>
-                    <h5 class="text-start mb-0">
-                      #0453119
-                    </h5>
-                  </div>
-                  <div class="col-lg-5 col-md-7 mt-auto">
-                    <div class="row mt-md-5 mt-4 text-md-end text-start">
-                      <div class="col-md-6">
-                        <h6 class="text-secondary mb-0">Invoice date:</h6>
-                      </div>
-                      <div class="col-md-6">
-                        <h6 class="text-dark mb-0">06/03/2019</h6>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="table-responsive">
+                        <table class="info-table">
+                          <tr>
+                            <td>
+                              <strong>SHIP TO:</strong><br>
+                              <label for="ship-name">
+                                <h6>Name:</h6>
+                              </label>
+                              <input type="text" id="ship-name" value="Dan Ferrara" style="width: 70%;"><br>
+
+                              <label for="ship-address">
+                                <h6>Address:</h6>
+                              </label>
+                              <input type="text" id="ship-address" value="1805 Laurel Way" style="width: 70%;"><br>
+
+                              <label for="ship-city">
+                                <h6>City:</h6>
+                              </label>
+                              <input type="text" id="ship-city" value="Mattituck, NY" style="width: 70%;"><br>
+
+                              <label for="ship-cell">
+                                <h6>Cell:</h6>
+                              </label>
+                              <input type="text" id="ship-cell" value="914-659-0362" style="width: 70%;"><br>
+
+                              <label for="ship-email">
+                                <h6>Email:</h6>
+                              </label>
+                              <input type="email" id="ship-email" value="danfer@verizon.net" style="width: 70%;"><br>
+                            </td>
+                            <td>
+                              <strong>BILL TO:</strong><br>
+                              <label for="bill-company">
+                                <h6>Company:</h6>
+                              </label>
+                              <input type="text" id="bill-company" value="[Your Company]" style="width: 70%;"><br>
+
+                              <label for="bill-address">
+                                <h6>Address:</h6>
+                              </label>
+                              <input type="text" id="bill-address" value="[Your Address]" style="width: 70%;"><br>
+
+                              <label for="bill-phone">
+                                <h6>Phone:</h6>
+                              </label>
+                              <input type="text" id="bill-phone" value="[Your Phone Number]" style="width: 70%;"><br>
+
+                              <label for="bill-email">
+                                <h6>Email:</h6>
+                              </label>
+                              <input type="email" id="bill-email" value="danfer@verizon.net" style="width: 70%;"><br>
+
+                              <label for="ship-city">
+                                <h6>City:</h6>
+                              </label>
+                              <input type="text" id="ship-city" value="Mattituck, NY" style="width: 70%;"><br>
+                            </td>
+                          </tr>
+                        </table>
+                        <table class="details-table">
+                          <tr>
+                            <th>Handle</th>
+                            <td><input type="text" id="ship-city" value="N/A" style="width: 100%;"></td>
+                            <th>Hardware Finish</th>
+                            <td><input type="text" id="ship-city" value="Polished Chrome" style="width: 100%;"></td>
+                          </tr>
+                          <tr>
+                            <th>Glass Type</th>
+                            <td><input type="text" id="ship-city" value="Low Iron" style="width: 100%;"></td>
+                            <th>Door Thickness</th>
+                            <td><input type="text" id="ship-city" value="N/A" style="width: 100%;"></td>
+                          </tr>
+                        </table>
+                        <h3>Project Details</h3>
+                        <table class="info-table">
+                          <tr>
+                            <td>
+                              <strong>SHIP TO:</strong><br>
+
+                              <div style="position: relative; width: 70%; margin-bottom: 10px;">
+                                <!-- Imagen de fondo -->
+                                <img src="{% static 'assets/img/3.jpg' %}" alt="Name" style="width: 100%;">
+
+                                <!-- Primer input a la izquierda, debajo de la imagen -->
+                                <input type="text" id="ship-name-left"
+                                  style="position: absolute; left: 0%; bottom: 0; width: 30%;" placeholder="Medida1">
+
+                                <!-- Input central, debajo de la imagen -->
+                                <input type="text" id="ship-name-center"
+                                  style="position: absolute; left: 35%; bottom: 0; width: 30%;" placeholder="Medida2">
+
+                                <!-- Input a la derecha, debajo de la imagen -->
+                                <input type="text" id="ship-name-right"
+                                  style="position: absolute; right: 0; bottom: 0; width: 30%;" placeholder="Medida3">
+                              </div>
+
+                            </td>
+                            <td>
+                              <strong>SHIP TO:</strong><br>
+                              <img src="{% static 'assets/img/5.jpg' %}" alt="Name" style="width: 100%;">
+                            </td>
+                          </tr>
+                        </table>
+                        <p>
+                          - 78" tall<br>
+                          - L-shaped panel 24"x48"<br>
+                          - Clips all around<br>
+                          - Includes caulking, installation, laser measure<br>
+                        </p>
+                        <h3>Cost Breakdown</h3>
+                        <table class="details-table">
+                          <tr>
+                            <th>Description</th>
+                            <th>Amount</th>
+                          </tr>
+                          <tr>
+                            <td>Low Iron Glass</td>
+                            <td>$2,300</td>
+                          </tr>
+                          <tr>
+                            <td>50% Deposit</td>
+                            <td>$1,150</td>
+                          </tr>
+                          <tr>
+                            <td>Balance</td>
+                            <td>$1,150</td>
+                          </tr>
+                        </table>
+                        <div class="signature-section">
+                          <p><strong>Contract Approved:</strong> ___________________________ Date: _______________</p>
+                        </div>
+
+                        <div class="footer">
+                          <p>When customer service is performed with passion - the results speak for themselves.</p>
+                        </div>
                       </div>
                     </div>
-                    <div class="row text-md-end text-start">
-                      <div class="col-md-6">
-                        <h6 class="text-secondary mb-0">Due date:</h6>
-                      </div>
-                      <div class="col-md-6">
-                        <h6 class="text-dark mb-0">11/03/2019</h6>
-                      </div>
+                  </div>
+                </div>
+                <div class="card-footer mt-md-5 mt-4">
+                  <div class="row">
+                    <div class="col-lg-7 text-md-end mt-md-0 mt-3">
+                      <button class="btn bg-gradient-info mt-lg-7 mb-0" type="submit" name="button">Print</button>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-12">
-                    <div class="table-responsive">
-                      <table class="table text-right">
-                        <thead class="bg-default">
-                          <tr>
-                            <th scope="col" class="pe-2 text-start ps-2">Item</th>
-                            <th scope="col" class="pe-2">Qty</th>
-                            <th scope="col" class="pe-2" colspan="2">Rate</th>
-                            <th scope="col" class="pe-2">Amount</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td class="text-start">Premium Support</td>
-                            <td class="ps-4">1</td>
-                            <td class="ps-4" colspan="2">$ 9.00</td>
-                            <td class="ps-4">$ 9.00</td>
-                          </tr>
-                          <tr>
-                            <td class="text-start">Soft UI Design System PRO</td>
-                            <td class="ps-4">3</td>
-                            <td class="ps-4" colspan="2">$ 100.00</td>
-                            <td class="ps-4">$ 300.00</td>
-                          </tr>
-                          <tr>
-                            <td class="text-start">Parts for service</td>
-                            <td class="ps-4">1</td>
-                            <td class="ps-4" colspan="2">$ 89.00</td>
-                            <td class="ps-4">$ 89.00</td>
-                          </tr>
-                        </tbody>
-                        <tfoot>
-                          <tr>
-                            <th></th>
-                            <th></th>
-                            <th class="h5 ps-4" colspan="2">Total</th>
-                            <th colspan="1" class="text-right h5 ps-4">$ 698</th>
-                          </tr>
-                        </tfoot>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-footer mt-md-5 mt-4">
-                <div class="row">
-                  <div class="col-lg-5 text-left">
-                    <h5>Thank you!</h5>
-                    <p class="text-secondary text-sm">If you encounter any issues related to the invoice you can contact us at:</p>
-                    <h6 class="text-secondary mb-0">
-                      email:
-                      <span class="text-dark">support@creative-tim.com</span>
-                    </h6>
-                  </div>
-                  <div class="col-lg-7 text-md-end mt-md-0 mt-3">
-                    <button class="btn bg-gradient-info mt-lg-7 mb-0" onClick="window.print()" type="button" name="button">Print</button>
-                  </div>
-                </div>
-              </div>
-            </div>
           </form>
         </div>
       </div>
@@ -421,5 +542,5 @@
       img.classList.toggle('selected');
     });
   });
-  </script>
+</script>
 {% endblock content %}

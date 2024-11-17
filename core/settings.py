@@ -78,6 +78,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_spectacular',
     'django_api_gen',
+
+    'wkhtmltopdf',
 ]
 
 SITE_ID = 1

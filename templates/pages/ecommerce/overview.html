@@ -356,8 +356,8 @@
         <div class="col-md-8 col-sm-10 mx-auto">
           <form class="" action="{% url 'generate_pdf' %}" method="get">
             {% csrf_token %}
-            <div class="card my-sm-5">
-              <div class="card-header text-center">
+            <div class="card my-sm-5" style="width: 773.316px; height: 1596.27px;">
+              <div class="card-header text-center" style="height: 1656.72px; transform: translate(0px, -67px); position: relative; transition: none; cursor: move; width: 766.215px;">
                 <div class="row justify-content-between">
                   <div class="navbar-brand m-0">
                     <img class="mb-2 w-25 p-2" src="{% static 'assets/img/imagen_01.png' %}" alt="Logo">
@@ -450,25 +450,22 @@
                           <tr>
                             <td>
                               <strong>SHIP TO:</strong><br>
-
-                              <div style="position: relative; width: 70%; margin-bottom: 10px;">
+                            
+                              <div style="position: relative; width: 70%; margin-bottom: 10px; text-align: center;">
                                 <!-- Imagen de fondo -->
-                                <img src="{% static 'assets/img/3.jpg' %}" alt="Name" style="width: 100%;">
-
-                                <!-- Primer input a la izquierda, debajo de la imagen -->
+                                <img src="{% static 'assets/img/3.jpg' %}" alt="Name" style="width: 100%; display: block; position: relative; left: 40px; top: -4px; transition: none; cursor: move;">
+                            
+                                <!-- Inputs posicionados debajo de la imagen -->
                                 <input type="text" id="ship-name-left"
-                                  style="position: absolute; left: 0%; bottom: 0; width: 30%;" placeholder="Medida1">
-
-                                <!-- Input central, debajo de la imagen -->
+                                 style="position: absolute; left: 0px; bottom: 10px; width: 36.6406px; text-align: center; top: 0px; height: 35.094px; transform: translate(0px, 90px); transition: none; cursor: move;" 
+                                 placeholder="Medida1">
                                 <input type="text" id="ship-name-center"
-                                  style="position: absolute; left: 35%; bottom: 0; width: 30%;" placeholder="Medida2">
-
-                                <!-- Input a la derecha, debajo de la imagen -->
+                                  style="position: absolute; left: 101px; bottom: 10px; width: 69.625px; text-align: center; top: 248px; height: 7px; transition: none; cursor: move;" placeholder="Medida2">
                                 <input type="text" id="ship-name-right"
-                                  style="position: absolute; right: 0; bottom: 0; width: 30%;" placeholder="Medida3">
+                                  style="position: absolute; inset: 1px 5% 10px 224px; width: 41.6406px; text-align: center; height: 41.094px; transform: translate(0px, 90px); transition: none; cursor: move;" placeholder="Medida3">
                               </div>
-
                             </td>
+                            
                             <td>
                               <strong>SHIP TO:</strong><br>
                               <img src="{% static 'assets/img/5.jpg' %}" alt="Name" style="width: 100%;">
@@ -511,10 +508,10 @@
                     </div>
                   </div>
                 </div>
-                <div class="card-footer mt-md-5 mt-4">
+                <div class="card-footer mt-md-5 mt-4" style="position: relative; left: 0px; top: -53px;">
                   <div class="row">
-                    <div class="col-lg-7 text-md-end mt-md-0 mt-3">
-                      <button class="btn bg-gradient-info mt-lg-7 mb-0" type="submit" name="button">Print</button>
+                    <div class="col-lg-7 text-md-end mt-md-0 mt-3" style="position: relative; left: 21px; top: -69px; transition: none; cursor: move;">
+                      <button class="btn bg-gradient-info mt-lg-7 mb-0" style="position: relative; left: 0px; top: -53px;" type="submit" name="button">Print</button>
                     </div>
                   </div>
                 </div>

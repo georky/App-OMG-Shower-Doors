@@ -1,207 +1,212 @@
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proposal</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            line-height: 1.5;
-            background-color: #f9f9f9;
-        }
-        .container {
-            max-width: 900px;
-            margin: auto;
-            padding: 20px;
-            background: white;
-            border: 1px solid #ddd;
-        }
-        .header {
-            text-align: center;
-        }
-        .header h1 {
-            font-size: 24px;
-            margin: 0;
-        }
-        .header img {
-            max-width: 100px;
-        }
-        .info-table, .details-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        .info-table td, .details-table td, .details-table th {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-        .info-table td {
-            width: 50%;
-        }
-        .details-table th {
-            background-color: #f2f2f2;
-        }
-        .footer {
-            margin-top: 20px;
-            font-size: 12px;
-            text-align: center;
-        }
-        .signature-section {
-            margin-top: 20px;
-            font-size: 14px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>OMG Shower Doors Inc.</h1>
-            <p>Any Door Imaginable - At affordable prices!</p>
-            <p>89 Montauk Hwy, Copiague NY 11726</p>
-            <p>Phone: 631-842-2515 | Fax: 631-842-2780</p>
-            <p><a href="http://www.omgshowerdoors.com">www.omgshowerdoors.com</a></p>
-        </div>
 
-        <table class="info-table">
-            <tr>
-                <td>
-                    <strong>SHIP TO:</strong><br>
-                    <label for="ship-name">
-                        <h6>Name:</h6>
-                    </label>
-                    <input type="text" id="ship-name" value="Dan Ferrara" style="width: 70%;"><br>
-
-                    <label for="ship-address">
-                        <h6>Address:</h6>
-                    </label>
-                    <input type="text" id="ship-address" value="1805 Laurel Way" style="width: 70%;"><br>
-
-                    <label for="ship-city">
-                        <h6>City:</h6>
-                    </label>
-                    <input type="text" id="ship-city" value="Mattituck, NY" style="width: 70%;"><br>
-
-                    <label for="ship-cell">
-                        <h6>Cell:</h6>
-                    </label>
-                    <input type="text" id="ship-cell" value="914-659-0362" style="width: 70%;"><br>
-
-                    <label for="ship-email">
-                        <h6>Email:</h6>
-                    </label>
-                    <input type="email" id="ship-email" value="danfer@verizon.net" style="width: 70%;"><br>
-                </td>
-                <td>
-                    <strong>BILL TO:</strong><br>
-                    <label for="bill-company">
-                        <h6>Company:</h6>
-                    </label>
-                    <input type="text" id="bill-company" value="[Your Company]" style="width: 70%;"><br>
-
-                    <label for="bill-address">
-                        <h6>Address:</h6>
-                    </label>
-                    <input type="text" id="bill-address" value="[Your Address]" style="width: 70%;"><br>
-
-                    <label for="bill-phone">
-                        <h6>Phone:</h6>
-                    </label>
-                    <input type="text" id="bill-phone" value="[Your Phone Number]" style="width: 70%;"><br>
-
-                    <label for="bill-email">
-                        <h6>Email:</h6>
-                    </label>
-                    <input type="email" id="bill-email" value="danfer@verizon.net" style="width: 70%;"><br>
-
-                    <label for="bill-city">
-                        <h6>City:</h6>
-                    </label>
-                    <input type="text" id="bill-city" value="Mattituck, NY" style="width: 70%;"><br>
-                </td>
-            </tr>
-        </table>
-
-        <table class="details-table">
-            <tr>
-                <th>Handle</th>
-                <td><input type="text" id="handle" value="N/A" style="width: 100%;"></td>
-                <th>Hardware Finish</th>
-                <td><input type="text" id="hardware-finish" value="Polished Chrome" style="width: 100%;"></td>
-            </tr>
-            <tr>
-                <th>Glass Type</th>
-                <td><input type="text" id="glass-type" value="Low Iron" style="width: 100%;"></td>
-                <th>Door Thickness</th>
-                <td><input type="text" id="door-thickness" value="N/A" style="width: 100%;"></td>
-            </tr>
-        </table>
-
-        <h3>Project Details</h3>
-        <table class="info-table">
-            <tr>
-                <td>
-                    <strong>SHIP TO:</strong><br>
-
-                    <div style="position: relative; width: 70%; margin-bottom: 10px;">
-                        <!-- Imagen de fondo -->
-                        <img src="file:///F:/App_Shower_Doors/staticfiles/assets/img/3.jpg" alt="Image" style="width: 100%;">
-
-                        <!-- Primer input a la izquierda, debajo de la imagen -->
-                        <input type="text" id="measure-1" style="position: absolute; left: 0%; bottom: 0; width: 30%;" placeholder="Medida1">
-
-                        <!-- Input central, debajo de la imagen -->
-                        <input type="text" id="measure-2" style="position: absolute; left: 35%; bottom: 0; width: 30%;" placeholder="Medida2">
-
-                        <!-- Input a la derecha, debajo de la imagen -->
-                        <input type="text" id="measure-3" style="position: absolute; right: 0; bottom: 0; width: 30%;" placeholder="Medida3">
-                    </div>
-
-                </td>
-                <td>
-                    <strong>SHIP TO:</strong><br>
-                    <img src="{{ STATIC_URL }}assets/img/5.jpg" alt="Name" style="width: 100%;">
-                </td>
-            </tr>
-        </table>
-
-        <p>
-            - 78" tall<br>
-            - L-shaped panel 24"x48"<br>
-            - Clips all around<br>
-            - Includes caulking, installation, laser measure<br>
-        </p>
-
-        <h3>Cost Breakdown</h3>
-        <table class="details-table">
-            <tr>
-                <th>Description</th>
-                <th>Amount</th>
-            </tr>
-            <tr>
-                <td>Low Iron Glass</td>
-                <td>$2,300</td>
-            </tr>
-            <tr>
-                <td>50% Deposit</td>
-                <td>$1,150</td>
-            </tr>
-            <tr>
-                <td>Balance</td>
-                <td>$1,150</td>
-            </tr>
-        </table>
-
-        <div class="signature-section">
-            <p><strong>Contract Approved:</strong> ___________________________ Date: _______________</p>
-        </div>
-
-        <div class="footer">
-            <p>When customer service is performed with passion - the results speak for themselves.</p>
-        </div>
+<style>
+    .details-table,
+    .info-table {
+      border-collapse: collapse; /* Elimina espacios entre celdas */
+      width: 100%;
+      margin-bottom: 10px; /* Reduce margen inferior */
+    }
+  
+    .details-table th,
+    .details-table td,
+    .info-table td {
+      border: 1px solid black;
+      padding: 5px; /* Reduce el relleno de las celdas */
+      vertical-align: top;
+    }
+  
+    .details-table th {
+      background-color: #f2f2f2;
+    }
+  
+    .input-full,
+    .input-wide {
+      width: 100%;
+      box-sizing: border-box;
+      margin-bottom: 4px; /* Reduce el margen inferior */
+    }
+  
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 2px; /* Reduce el margen inferior */
+    }
+  
+    .form-check-label {
+      cursor: pointer;
+      margin-bottom: 2px; /* Reduce el margen inferior */
+    }
+  
+    .card-header h6,
+    .card-header p {
+      margin: 0; /* Elimina márgenes en textos del encabezado */
+    }
+  
+    .list-group-item {
+      padding: 5px 0; /* Reduce el relleno */
+      border: 0; /* Asegura que no haya bordes adicionales */
+    }
+    .image-small {
+    width: 100px; /* Ajusta este valor según el tamaño deseado */
+    height: auto; /* Mantiene la proporción de la imagen */
+  }
+  .header-size {
+    height: 100px; /* Ajusta este valor según sea necesario */
+  }
+  </style>
+  
+  <div class="container-fluid my-3 py-3 tab-pane fade" id="project-list" role="tabpanel" aria-labelledby="project-list-tab">
+    <div class="row">
+      <div class="col-md-8 col-sm-10 mx-auto">
+        <form action="#" method="get">
+          {% csrf_token %}
+          <div class="card my-sm-5 position-relative transform-transition">
+            <div class="card-header position-relative header-size d-flex justify-content-center align-items-center text-center">
+              <div class="navbar-brand m-0">
+                <img class="mb-2 image-small mx-auto" src="{% static 'assets/img/imagen_01.png' %}" alt="Logo de la Empresa">
+                <h6>S89 Montauk Hwy. Copiague NY 11726</h6>
+                <p class="d-block text-secondary">tel: 631-842-2515 | 631-842-2780 fx</p>
+                <p class="d-block text-secondary">www.omgshowerdoors.com</p>
+              </div>
+            </div>
+          </div>
+            
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="details-table">
+                    <table class="details-table">
+                        <tr>
+                          <th colspan="2">SHIP TO</th>
+                          <th colspan="2">BILL TO</th>
+                        </tr>
+                        <tr>
+                          <td><label for="ship-name"><h6>Name:</h6></label></td>
+                          <td><input type="text" id="ship-name" value="Dan Ferrara" class="input-wide"></td>
+                          <td><label for="bill-company"><h6>Company:</h6></label></td>
+                          <td><input type="text" id="bill-company" value="[Your Company]" class="input-wide"></td>
+                        </tr>
+                        <tr>
+                          <td><label for="ship-address"><h6>Address:</h6></label></td>
+                          <td><input type="text" id="ship-address" value="1805 Laurel Way" class="input-wide"></td>
+                          <td><label for="bill-address"><h6>Address:</h6></label></td>
+                          <td><input type="text" id="bill-address" value="[Your Address]" class="input-wide"></td>
+                        </tr>
+                        <tr>
+                          <td><label for="ship-city"><h6>City:</h6></label></td>
+                          <td><input type="text" id="ship-city" value="Mattituck, NY" class="input-wide"></td>
+                          <td><label for="bill-city"><h6>City:</h6></label></td>
+                          <td><input type="text" id="bill-city" value="Mattituck, NY" class="input-wide"></td>
+                        </tr>
+                        <tr>
+                          <td><label for="ship-cell"><h6>Cell:</h6></label></td>
+                          <td><input type="text" id="ship-cell" value="914-659-0362" class="input-wide"></td>
+                          <td><label for="bill-phone"><h6>Phone:</h6></label></td>
+                          <td><input type="text" id="bill-phone" value="[Your Phone Number]" class="input-wide"></td>
+                        </tr>
+                        <tr>
+                          <td><label for="ship-email"><h6>Email:</h6></label></td>
+                          <td><input type="email" id="ship-email" value="danfer@verizon.net" class="input-wide"></td>
+                          <td><label for="bill-email"><h6>Email:</h6></label></td>
+                          <td><input type="email" id="bill-email" value="danfer@verizon.net" class="input-wide"></td>
+                        </tr>
+                      </table>
+                      <table class="details-table">
+                      <tr>
+                        <th>Handle</th>
+                        <td><input type="text" id="handle" value="N/A" class="input-full"></td>
+                        <th>Hardware Finish</th>
+                        <td><input type="text" id="hardware-finish" value="Polished Chrome" class="input-full"></td>
+                      </tr>
+                      <tr>
+                        <th>Glass Type</th>
+                        <td><input type="text" id="glass-type" value="Low Iron" class="input-full"></td>
+                        <th>Door Thickness</th>
+                        <td><input type="text" id="door-thickness" value="N/A" class="input-full"></td>
+                      </tr>
+                      <tr>
+                        <th>Stationary Panel</th>
+                        <td colspan="3">
+                          <input type="text" id="stationary-panel" value="Low Iron" class="input-full">
+                        </td>
+                      </tr>
+                    </table>
+                
+                <h4>Project Details</h4>
+                <table class="details-table">
+                  <tr>
+                    <td>
+                      <strong>SHIP TO:</strong><br>
+                      <div class="position-relative input-with-image">
+                        <img src="{% static 'assets/img/2.png' %}" alt="Name" class="image-adjusted">
+                        <!-- Additional content -->
+                      </div>
+                    </td>
+                    <td>
+                      <strong>SHIP TO:</strong><br>
+                      <img src="{% static 'assets/img/1.png' %}" alt="Name" class="image-small">
+                    </td>
+                  </tr>
+                </table>
+                <input type="text" id="height" name="height" class="form-control" placeholder="Description">
+                <br>
+                <br>
+                <table class="details-table">
+                    <tr>
+                        <th colspan="2" style="width: 352.17px;" data-selected="true" data-label-id="0">
+                          Cost Breakdown
+                        </th>
+                      </tr>
+                  <tr>
+                    <th scope="col">Description</th>
+                    <th scope="col">Amount</th>
+                  </tr>
+                  <tr>
+                    <td>Low Iron Glass</td>
+                    <td>$2,300</td>
+                  </tr>
+                  <tr>
+                    <td>50% Deposit</td>
+                    <td>$1,150</td>
+                  </tr>
+                  <tr>
+                    <td>Balance</td>
+                    <td>$1,150</td>
+                  </tr>
+                </table>
+                <br>
+                <table class="details-table">
+                  <tr>
+                    <th scope="col">Balance to be paid in cash or Cheks</th>
+                    <td>
+                        <ul class="list-group">
+                          <li class="list-group-item border-0 px-0">
+                            <div class="form-check form-switch ps-0">
+                              <input class="form-check-input ms-auto" type="checkbox" id="flexSwitchCheckDefault3" >Credit card
+                              
+                            </div>
+                          </li>
+                          <li class="list-group-item border-0 px-0">
+                            <div class="form-check form-switch ps-0">
+                              <input class="form-check-input ms-auto" type="checkbox" id="flexSwitchCheckDefault4" checked="">Cash payment
+                            </div>
+                          </li>
+                        </ul>
+                      </td>
+                  </tr>
+                  <tr>
+                    <td>CONTRACT APROVED</td>
+                    <td><input type="date" id="bill-email" class="input-wide"></td>
+                  </tr>
+                  <tr>
+                    <td>WORK COMPLETED SATISFACTION</td>
+                    <td><input type="date" id="bill-email" class="input-wide"></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
-</body>
-</html>
+  </div>

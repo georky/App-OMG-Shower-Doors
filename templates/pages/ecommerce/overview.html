@@ -52,6 +52,7 @@
     padding: 8px; /* Relleno para espacio interno */
     text-align: left; /* Alineación del texto */
   }
+
 </style>
 <style>
   .info-table,
@@ -144,9 +145,9 @@
   .avatar3d {
     width: 100px;
     height: 100px;
-    margin-right: 5px;
+    margin-right: 1px;
     object-fit: cover;
-    transition: transform 0.5s ease, box-shadow 0.5s ease, filter 0.3s ease;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     perspective: 1000px;
   }
@@ -154,15 +155,14 @@
   /* Efecto cuando el usuario pasa el ratón sobre la imagen */
   /* Efecto al hacer hover */
   .avatar3d:hover {
-    transform: perspective(600px) rotateY(20deg) rotateX(10deg) scale(1.1) translateZ(10px);
-    box-shadow: 0 12px 24px #00000066;
-    animation: float 3s ease-in-out infinite;
+    transform: scale(1.2) perspective(500px) rotateX(10deg) rotateY(10deg);
     /* Añade una animación de flotación */
   }
 
   /* Efecto de selección */
   .avatar3d.selected {
-    filter: hue-rotate(200deg) brightness(1.2);
+    box-shadow: 0 0 10px 5px rgba(0, 123, 255, 0.5);
+  outline: none;
   }
 
   /* Efecto flotante continuo */
@@ -180,6 +180,12 @@
     }
 
   }
+
+#related-images .selected {
+  border: 3px solid #007bff; /* Color de borde, puede ser cualquier color que prefieras */
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Sombra de resaltar */
+  transition: all 0.3s ease; /* Suavizar la transición */
+}
 </style>
 <div class="container mt-4">
   <!-- Barra de navegación con pestañas -->
@@ -217,29 +223,28 @@
     <div class="container-fluid py-4 tab-pane fade show active" id="invoice" role="tabpanel"
       aria-labelledby="invoice-tab">
       <div class="row">
-        <div class="col-4">
+        <div class="col-4" id="selectable-images"><!-- aqui esta para selecionar las imagenes-->
           <div class="card blur shadow-blur max-height-vh-70 overflow-auto overflow-x-hidden mb-5 mb-lg-0">
             <div class="card-header p-3">
               <h6>Type</h6>
             </div>
             <div class="card-body p-2">
-              <a href="javascript:;" class="custom-link d-block p-2">
-                <div class="d-flex p-2 align-items-center">
-                  <!-- Contenedor de cada imagen con su nombre -->
+              <a href="javascript:;" class="">
+                <div class="d-flex p-2 align-items-center image-selector">
                   <div class="text-center me-2">
-                    <img alt="Image" src="{% static 'assets/img/1.png' %}" class="avatar3d shadow">
+                    <img alt="Image" src="{% static 'assets/img/1.png' %}" class="avatar3d  " data-id="1.1">
                     <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
                       Inline
                     </span>
                   </div>
                   <div class="text-center me-2">
-                    <img alt="Image" src="{% static 'assets/img/2.png' %}" class="avatar3d shadow">
+                    <img alt="Image" src="{% static 'assets/img/RightAngle.png' %}" class="avatar3d " data-id="1.2">
                     <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
                       Right Angle
                     </span>
                   </div>
                   <div class="text-center">
-                    <img alt="Image" src="{% static 'assets/img/3.jpg' %}" class="avatar3d shadow">
+                    <img alt="Image" src="{% static 'assets/img/Neo.png' %}" class="avatar3d "  data-id="1.3">
                     <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
                       Neo
                     </span>
@@ -249,62 +254,61 @@
               <div class="card-header p-3">
                 <h6>Doors</h6>
               </div>
-              <a href="javascript:;" class="custom-link d-block p-2">
-                <div class="d-flex p-2 align-items-center">
+              <a href="javascript:;" class="">
+                <div class="image-selector d-flex p-2 align-items-center">
                   <!-- Contenedor de cada imagen con su nombre -->
                   <div class="text-center me-2">
-                    <img alt="Image" src="{% static 'assets/img/1.jpg' %}" class="avatar3d shadow">
+                    <img alt="Image" src="{% static 'assets/img/Single.png' %}" class="avatar3d " data-id="2.1">
                     <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
-                      Inline
+                      Single
                     </span>
                   </div>
                   <div class="text-center me-2">
-                    <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
+                    <img alt="Image" src="{% static 'assets/img/1.png' %}" class="avatar3d " data-id="2.2">
                     <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
-                      Right Angle
+                      Double
                     </span>
                   </div>
                   <div class="text-center">
-                    <img alt="Image" src="{% static 'assets/img/3.jpg' %}" class="avatar3d shadow">
+                    <img alt="Image" src="{% static 'assets/img/Bifold.png' %}" class="avatar3d " data-id="2.3">
                     <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
-                      Neo
+                      Bifold
                     </span>
                   </div>
                 </div>
-              </a>
-              <a href="javascript:;" class="custom-link d-block p-2">
-                <div class="d-flex p-2 align-items-center">
-                  <!-- Contenedor de cada imagen con su nombre -->
-                  <div class="text-center me-2">
-                    <img alt="Image" src="{% static 'assets/img/1.jpg' %}" class="avatar3d shadow">
-                    <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
-                      Inline
-                    </span>
+                <a href="javascript:;" class="s">
+                  <div class="image-selector d-flex p-2 align-items-center">
+                    <!-- Contenedor de cada imagen con su nombre -->
+                    <div class="text-center me-2">
+                      <img alt="Image" src="{% static 'assets/img/SingleSliding.png' %}" class="avatar3d " data-id="2.4">
+                      <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
+                        Single Sliding
+                      </span>
+                    </div>
+                    <div class="text-center me-2">
+                      <img alt="Image" src="{% static 'assets/img/DoubleSliding.png' %}" class="avatar3d " data-id="2.5">
+                      <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
+                        Double Sliding
+                      </span>
+                    </div>
                   </div>
-                  <div class="text-center me-2">
-                    <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-                    <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
-                      Right Angle
-                    </span>
-                  </div>
-                </div>
-              </a>
+                </a>
               <div class="card-header p-3">
                 <h6>Hinges</h6>
               </div>
-              <a href="javascript:;" class="custom-link d-block p-2">
+              <a href="javascript:;" class="">
                 <div class="d-flex p-2 align-items-center">
                   <!-- Contenedor de cada imagen con su nombre -->
                   <div class="text-center me-2">
-                    <img alt="Image" src="{% static 'assets/img/1.jpg' %}" class="avatar3d shadow">
+                    <img alt="Image" src="{% static 'assets/img/12.jpg' %}" data-id="12" class="avatar3d ">
                     <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
-                      Inline
+                      HANDLES
                     </span>
                   </div>
                   <div class="text-center me-2">
-                    <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
+                    <img alt="Image" src="{% static 'assets/img/13.jpg' %}" class="avatar3d " data-id="13">
                     <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
-                      Right Angle
+                      HANDLES
                     </span>
                   </div>
                 </div>
@@ -318,80 +322,10 @@
           <div class="card blur shadow-blur max-height-vh-70">
             <div class="card-body overflow-auto overflow-x-hidden">
               <div class="row justify-content-start mb-4">
-                <a href="javascript:;" class="custom-link d-block p-2">
-                  <div class="d-flex p-2 align-items-center">
-                    <!-- Contenedor de cada imagen con su nombre -->
-                    <div class="text-center me-2">
-                      <img alt="Image" src="{% static 'assets/img/3.jpg' %}" class="avatar3d shadow">
-                    </div>
-                    <div class="text-center me-2">
-                      <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-                    </div>
-                    <div class="text-center me-2">
-                      <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-                    </div>
-                    <div class="text-center me-2">
-                      <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-                    </div>
-                    <div class="text-center me-2">
-                      <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="row justify-content-start mb-4">
-                <a href="javascript:;" class="custom-link d-block p-2">
-                  <div class="d-flex p-2 align-items-center">
-                    <!-- Contenedor de cada imagen con su nombre -->
-                    <div class="text-center me-2">
-                      <img alt="Image" src="{% static 'assets/img/1.jpg' %}" class="avatar3d shadow">
-
-                    </div>
-                    <div class="text-center me-2">
-                      <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-
-                    </div>
-                    <div class="text-center me-2">
-                      <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-
-                    </div>
-                    <div class="text-center me-2">
-                      <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-
-                    </div>
-                    <div class="text-center me-2">
-                      <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="row justify-content-start mb-4">
-                <a href="javascript:;" class="custom-link d-block p-2">
-                  <div class="d-flex p-2 align-items-center">
-                    <!-- Contenedor de cada imagen con su nombre -->
-                    <div class="text-center me-2">
-                      <img alt="Image" src="{% static 'assets/img/1.jpg' %}" class="avatar3d shadow">
-
-                    </div>
-                    <div class="text-center me-2">
-                      <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-
-                    </div>
-                    <div class="text-center me-2">
-                      <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-
-                    </div>
-                    <div class="text-center me-2">
-                      <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-
-                    </div>
-                    <div class="text-center me-2">
-                      <img alt="Image" src="{% static 'assets/img/2.jpg' %}" class="avatar3d shadow">
-
-                    </div>
-                  </div>
-                </a>
+                <div class="d-flex p-2 align-items-center" id="related-images">
+                
+                </div>
+                </div>
               </div>
             </div>
           </div>
@@ -483,7 +417,7 @@
                         <td>
                           <strong>SHIP TO:</strong><br>
                           <div class="position-relative input-with-image">
-                            <img src="{% static 'assets/img/2.png' %}" alt="Name" class="image-adjusted">
+                            <img id="selected-image-1" src="" alt="Name" class="image-adjusted">
                             <input type="text" id="ship-name-left" placeholder="Medida1" class="input-small position-absolute">
                             <input type="text" id="ship-name-center" placeholder="Medida2" class="input-medium position-absolute">
                             <input type="text" id="ship-name-right" placeholder="Medida3" class="input-tiny position-absolute">
@@ -491,7 +425,12 @@
                         </td>
                         <td>
                           <strong>SHIP TO:</strong><br>
-                          <img src="{% static 'assets/img/1.png' %}" alt="Name" class="image-small">
+                          <div class="position-relative input-with-image">
+                            <img id="selected-image-2" src="" alt="Name" class="image-adjusted">
+                            <input type="text" id="ship-name-left" placeholder="Medida1" class="input-small position-absolute">
+                            <input type="text" id="ship-name-center" placeholder="Medida2" class="input-medium position-absolute">
+                            <input type="text" id="ship-name-right" placeholder="Medida3" class="input-tiny position-absolute">
+                          </div>
                         </td>
                       </tr>
                     </table>
@@ -579,13 +518,110 @@
 
 </div>
 
+
 <script>
-  // Selecciona todas las imágenes con la clase avatar3d
-  document.querySelectorAll('.avatar3d').forEach((img) => {
-    img.addEventListener('click', () => {
-      // Alterna la clase 'selected' en la imagen que fue clickeada
-      img.classList.toggle('selected');
+ const selectableImages = document.getElementById('selectable-images');
+const relatedImagesContainer = document.getElementById('related-images');
+const selectedImageDest1 = document.getElementById('selected-image-1'); // Contenedor para la imagen 1
+const selectedImageDest2 = document.getElementById('selected-image-2'); // Contenedor para la imagen 2
+const selectedImages = new Set(); // Usamos un Set para evitar duplicados
+let selectedImagesArray = []; // Para almacenar las imágenes seleccionadas
+
+// Evento para seleccionar las imágenes principales
+selectableImages.addEventListener('click', (event) => {
+  const img = event.target;
+
+  if (img.tagName === 'IMG') {
+    const imgId = img.dataset.id;
+
+    // Añadir o quitar la imagen seleccionada
+    if (selectedImages.has(imgId)) {
+      selectedImages.delete(imgId);
+      img.classList.remove('selected');
+    } else if (selectedImages.size < 2) {
+      selectedImages.add(imgId);
+      img.classList.add('selected');
+      console.log(selectedImages);
+    }
+
+    // Mostrar imágenes relacionadas si hay dos seleccionadas o si la imagen tiene data-id "12" o "13"
+    if (selectedImages.size === 2 || imgId === '12' || imgId === '13') {
+      showRelatedImages([...selectedImages]);
+    } else {
+      relatedImagesContainer.innerHTML = ''; // Limpiar las imágenes relacionadas
+    }
+  }
+});
+
+// Función para mostrar imágenes relacionadas
+function showRelatedImages(selected) {
+  relatedImagesContainer.innerHTML = ''; // Limpiar imágenes previas
+
+  const relatedImages = {
+    '1.1-2.1': ["{% static 'assets/img/4.jpg' %}", "{% static 'assets/img/3.jpg' %}","{% static 'assets/img/4.jpg' %}", "{% static 'assets/img/3.jpg' %}"],
+        '1.1-2.2': ["{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}","{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}"],
+        '1.1-2.3': ["{% static 'assets/img/6.png' %}", "{% static 'assets/img/6.png' %}","{% static 'assets/img/6.png' %}", "{% static 'assets/img/6.png' %}"],
+        '1.1-2.4': ["{% static 'assets/img/Single.png' %}", "{% static 'assets/img/Single.png' %}","{% static 'assets/img/Single.png' %}", "{% static 'assets/img/Single.png' %}"],
+        '1.1-2.5': ["{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}","{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}"],
+
+        '1.2-2.1': ["{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}","{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}"],
+        '1.2-2.2': ["{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}","{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}"],
+        '1.2-2.3': ["{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}","{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}"],
+        '1.2-2.4': ["{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}","{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}"],
+        '1.2-2.5': ["{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}","{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}"],
+
+        '1.3-2.1': ["{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}","{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}"],
+        '1.3-2.2': ["{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}","{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}"],
+        '1.3-2.3': ["{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}","{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}"],
+        '1.3-2.4': ["{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}","{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}"],
+        '1.3-2.5': ["{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}","{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}"],
+
+        '12': ["{% static 'assets/img/14.jpg' %}", "{% static 'assets/img/15.gif' %}","{% static 'assets/img/16.gif' %}", "{% static 'assets/img/17.jpg' %}"],
+        '13': ["{% static 'assets/img/14.jpg' %}", "{% static 'assets/img/15.gif' %}","{% static 'assets/img/16.gif' %}", "{% static 'assets/img/17.jpg' %}"],
+    // Agrega más combinaciones aquí
+  };
+
+  const key = selected.sort().join('-');
+  const imagesToShow = relatedImages[key] || [];
+
+  imagesToShow.forEach(src => {
+    // Crear un nuevo contenedor para cada imagen relacionada
+    const div = document.createElement('div');
+    div.classList.add('text-center', 'me-2');
+
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = '3D Avatar';
+    img.classList.add('avatar3d');
+
+    // Añadir un evento para seleccionar solo una imagen de las relacionadas
+    img.addEventListener('click', function() {
+      // Desmarcar cualquier imagen previamente seleccionada
+      const previouslySelected = document.querySelector('#related-images img.selected');
+      if (previouslySelected) {
+        previouslySelected.classList.remove('selected');
+      }
+
+      // Seleccionar la imagen actual
+      img.classList.add('selected');
+
+      // Actualizar las imágenes de destino con las imágenes seleccionadas
+      if (selectedImagesArray.length < 2) {
+        selectedImagesArray.push(src);
+      }
+
+      if (selectedImagesArray.length === 1) {
+        selectedImageDest1.src = src; // Cambiar el src de la primera imagen
+      } else {
+        selectedImageDest2.src = src; // Cambiar el src de la segunda imagen
+      }
     });
+
+    div.appendChild(img);
+    relatedImagesContainer.appendChild(div);
   });
+}
+
+
 </script>
 {% endblock content %}

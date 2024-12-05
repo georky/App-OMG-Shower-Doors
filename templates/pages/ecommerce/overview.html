@@ -52,9 +52,6 @@
     padding: 8px; /* Relleno para espacio interno */
     text-align: left; /* Alineación del texto */
   }
-
-</style>
-<style>
   .info-table,
   .details-table {
     width: 100%;
@@ -76,7 +73,6 @@
   .details-table th {
     background-color: #f2f2f2;
   }
-
   .nav-link.active svg .color-background {
     fill: #CB0C9F;
     /* Color de los íconos SVG cuando están activos */
@@ -107,27 +103,6 @@
     border-radius: 10px;
     /* Bordes redondeados */
   }
-
-  .avatar {
-    width: 100px;
-    height: 100px;
-    margin-right: 5px;
-    /* Espacio entre las imágenes */
-    object-fit: cover;
-    /* Asegura que las imágenes mantengan su proporción */
-
-  }
-
-  .avatar1 {
-    width: 150px;
-    height: 150px;
-    margin-right: 5px;
-    /* Espacio entre las imágenes */
-    object-fit: cover;
-    /* Asegura que las imágenes mantengan su proporción */
-
-  }
-
   .content-info {
     display: flex;
     flex-direction: column;
@@ -141,487 +116,1072 @@
     max-width: 150px;
     /* Ajusta el ancho según el espacio que desees */
   }
-
+</style>
+<style>
   .avatar3d {
-    width: 100px;
-    height: 100px;
-    margin-right: 1px;
+    width: 70px;
+    height: 70px;
+    background-color: white;
+    /* Puerta blanca por defecto */
+    margin: 10px;
     object-fit: cover;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border: 2px solid transparent;
+    /* Sin borde visible por defecto */
+    transition: background-color 0.5s ease, border 0.5s ease, box-shadow 0.5s ease;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    perspective: 1000px;
+    cursor: pointer;
+    border-radius: 4px;
+    /* Opcional: bordes suaves */
   }
 
   /* Efecto cuando el usuario pasa el ratón sobre la imagen */
   /* Efecto al hacer hover */
   .avatar3d:hover {
-    transform: scale(1.2) perspective(500px) rotateX(10deg) rotateY(10deg);
-    /* Añade una animación de flotación */
+    transform: scale(1.1);
+    /* Se agranda ligeramente */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    /* Sombra más intensa */
   }
 
   /* Efecto de selección */
   .avatar3d.selected {
-    box-shadow: 0 0 10px 5px rgba(0, 123, 255, 0.5);
-  outline: none;
-  }
-
-  /* Efecto flotante continuo */
-  @keyframes float {
-    0% {
-      transform: perspective(600px) translateY(0px);
-    }
-
-    50% {
-      transform: perspective(600px) translateY(-10px) rotateY(20deg) rotateX(10deg);
-    }
-
-    100% {
-      transform: perspective(600px) translateY(0px);
-    }
+    background-color: #5ec5f2;
+    /* Azul claro al seleccionar */
+    order: 2px solid #5ec5f2;
+    /* Borde azul oscuro */
+    /*box-shadow: 0 0 20px 10px rgba(102, 255, 0, 0.5); /* Resplandor azul */
 
   }
 
-#related-images .selected {
+  /* Responsividad: Ajusta el tamaño en pantallas más pequeñas */
+  @media (max-width: 768px) {
+    .avatar3d {
+      width: 50px;
+      height: 50px;
+      margin-right: 8px;
+    }
+  }
+
+  #related-images .selected {
+    background-color: #007bff;
+    /* Azul claro al seleccionar */
+    border: 2px solid #007bff;
+    /* Suavizar la transición */
+  }
+
+  figure {
+    width: 100%;
+    aspect-ratio: 1;
+    margin: 0 0 60px 0;
+    padding: 5px 20px 0;
+    box-sizing: border-box;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    position: relative;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+    overflow: hidden;
+  }
+
+  .custom-figure {
+    width: 50%;
+    aspect-ratio: 1;
+    margin: 0 0 60px 0;
+    padding: 5px 20px 0;
+    box-sizing: border-box;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    position: relative;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+    overflow: hidden;
+  }
+
+
+  figure::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transform-origin: center;
+    transform: scale(1) rotate(0deg);
+    filter: brightness(0.8);
+    opacity: 1;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1),
+      opacity 0.8s ease,
+      filter 0.8s ease;
+  }
+
+  figure:hover::before {
+    transform: scale(1.2) rotate(3deg);
+    filter: brightness(1);
+    opacity: 0.9;
+  }
+
+  figure:first-of-type::before {
+    background-image: url("{% static 'assets/img/shapes/waves-white.svg' %}");
+  }
+
+  figure:nth-of-type(2)::before {
+    background-image: url("{% static 'assets/img/shapes/waves-white.svg' %}");
+  }
+
+  figure:nth-of-type(3)::before {
+    background-image: url("{% static 'assets/img/shapes/waves-white.svg' %}");
+  }
+
+  figure img {
+    z-index: 2;
+    width: 75%;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  figure:hover img {
+    transform: scale(1.05);
+  }
+
+  figcaption {
+    z-index: 3;
+
+    color: #ffffff;
+    /* Cambié el color del texto a blanco */
+    padding: 10px;
+    font-size: 1.5rem;
+    text-align: center;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    opacity: 0;
+    /* Por defecto invisible */
+    transform: translateY(20px);
+    /* Fuera del área inicial */
+    position: absolute;
+    /* Asegúrate de que esté dentro del área del contenedor */
+
+    width: 80%;
+    /* Ocupa todo el ancho del contenedor */
+  }
+
+  figure:hover figcaption {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .rotate-3d {
+    position: relative;
+    width: 20%;
+    height: 20%;
+    perspective: 1200px;
+    /* Creando una mayor distancia de perspectiva*/
+  }
+
+  .rotate-3d img {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 12px;
+  }
+
+  .rotate-3d:hover img {
+    transition: transform 0.5s ease, box-shadow 0.3s ease;
+  }
+
+  /* Agregar línea divisoria entre columnas */
+  .border-right {
+    border-right: 2px solid hsl(0, 64%, 44%);
+    /* Línea divisoria en color gris */
+  }
+  #related-images .selected {
   border: 3px solid #007bff; /* Color de borde, puede ser cualquier color que prefieras */
   box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Sombra de resaltar */
   transition: all 0.3s ease; /* Suavizar la transición */
 }
-</style>
-<div class="container mt-4">
-  <!-- Barra de navegación con pestañas -->
-  <div class="container-fluid mt-4">
-    <div class="row align-items-center">
-      <div class="col-lg-4 col-sm-8">
-        <div class="nav-wrapper position-relative end-0">
-          <ul class="nav nav-pills nav-fill p-1" role="tablist">
-            <li class="nav-item">
-              <a class="nav-link mb-0 px-0 py-1 active  active " data-bs-toggle="tab" href="#invoice" role="tab"
-                aria-selected="true">
-                Messages
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="#project-list" role="tab"
-                aria-selected="false">
-                Social
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="#settings" role="tab"
-                aria-selected="false">
-                Notifications
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Contenido de cada pestaña -->
-  <div class="tab-content mt-3" id="myTabContent">
-    <!-- Contenido de la pestaña "Invoice" -->
-    <div class="container-fluid py-4 tab-pane fade show active" id="invoice" role="tabpanel"
-      aria-labelledby="invoice-tab">
-      <div class="row">
-        <div class="col-4" id="selectable-images"><!-- aqui esta para selecionar las imagenes-->
-          <div class="card blur shadow-blur max-height-vh-70 overflow-auto overflow-x-hidden mb-5 mb-lg-0">
-            <div class="card-header p-3">
-              <h6>Type</h6>
-            </div>
-            <div class="card-body p-2">
-              <a href="javascript:;" class="">
-                <div class="d-flex p-2 align-items-center image-selector">
-                  <div class="text-center me-2">
-                    <img alt="Image" src="{% static 'assets/img/1.png' %}" class="avatar3d  " data-id="1.1">
-                    <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
-                      Inline
-                    </span>
-                  </div>
-                  <div class="text-center me-2">
-                    <img alt="Image" src="{% static 'assets/img/RightAngle.png' %}" class="avatar3d " data-id="1.2">
-                    <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
-                      Right Angle
-                    </span>
-                  </div>
-                  <div class="text-center">
-                    <img alt="Image" src="{% static 'assets/img/Neo.png' %}" class="avatar3d "  data-id="1.3">
-                    <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
-                      Neo
-                    </span>
-                  </div>
-                </div>
-              </a>
-              <div class="card-header p-3">
-                <h6>Doors</h6>
-              </div>
-              <a href="javascript:;" class="">
-                <div class="image-selector d-flex p-2 align-items-center">
-                  <!-- Contenedor de cada imagen con su nombre -->
-                  <div class="text-center me-2">
-                    <img alt="Image" src="{% static 'assets/img/Single.png' %}" class="avatar3d " data-id="2.1">
-                    <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
-                      Single
-                    </span>
-                  </div>
-                  <div class="text-center me-2">
-                    <img alt="Image" src="{% static 'assets/img/1.png' %}" class="avatar3d " data-id="2.2">
-                    <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
-                      Double
-                    </span>
-                  </div>
-                  <div class="text-center">
-                    <img alt="Image" src="{% static 'assets/img/Bifold.png' %}" class="avatar3d " data-id="2.3">
-                    <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
-                      Bifold
-                    </span>
-                  </div>
-                </div>
-                <a href="javascript:;" class="s">
-                  <div class="image-selector d-flex p-2 align-items-center">
-                    <!-- Contenedor de cada imagen con su nombre -->
-                    <div class="text-center me-2">
-                      <img alt="Image" src="{% static 'assets/img/SingleSliding.png' %}" class="avatar3d " data-id="2.4">
-                      <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
-                        Single Sliding
-                      </span>
-                    </div>
-                    <div class="text-center me-2">
-                      <img alt="Image" src="{% static 'assets/img/DoubleSliding.png' %}" class="avatar3d " data-id="2.5">
-                      <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
-                        Double Sliding
-                      </span>
-                    </div>
-                  </div>
-                </a>
-              <div class="card-header p-3">
-                <h6>Hinges</h6>
-              </div>
-              <a href="javascript:;" class="">
-                <div class="d-flex p-2 align-items-center">
-                  <!-- Contenedor de cada imagen con su nombre -->
-                  <div class="text-center me-2">
-                    <img alt="Image" src="{% static 'assets/img/12.jpg' %}" data-id="12" class="avatar3d ">
-                    <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
-                      HANDLES
-                    </span>
-                  </div>
-                  <div class="text-center me-2">
-                    <img alt="Image" src="{% static 'assets/img/13.jpg' %}" class="avatar3d " data-id="13">
-                    <span class="text-muted text-sm col-11 p-0 text-truncate d-block">
-                      HANDLES
-                    </span>
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
+  </style>
+  <style>
+    figure {
+  transition: background-color 0.3s ease; /* Para animar el cambio de color */
+}
 
-        <!-- Contenedor de la otra Card -->
-        <div class="col-8">
-          <div class="card blur shadow-blur max-height-vh-70">
-            <div class="card-body overflow-auto overflow-x-hidden">
-              <div class="row justify-content-start mb-4">
-                <div class="d-flex p-2 align-items-center" id="related-images">
-                
-                </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+figure:hover {
+  background-color: #63B3ED; /* Color deseado al pasar el cursor */
+}
+figure.selectable {
+  transition: background-color 0.3s ease;
+}
 
-    <!-- Contenido de la pestaña "Project List" -->
-    <!-- Asegúrate de agregar las clases mencionadas abajo a tu archivo CSS para aplicar los estilos correctos -->
+figure.selectable.active {
+  background-color: #63B3ED;/* Color deseado al seleccionar */
+}
+figure.selectable1 {
+  transition: background-color 0.3s ease;
+}
+figure.selectable1.active {
+  background-color: #63B3ED;/* Color deseado al seleccionar */
+}
+figure.selectable2 {
+  transition: background-color 0.3s ease;
+}
+figure.selectable2.active {
+  background-color: #63B3ED;/* Color deseado al seleccionar */
+}
+figure.selectable3 {
+  transition: background-color 0.3s ease;
+}
+figure.selectable3.active {
+  background-color: #63B3ED;/* Color deseado al seleccionar */
+}
+figure.selectable4 {
+  transition: background-color 0.3s ease;
+}
+figure.selectable4.active {
+  background-color: #63B3ED;/* Color deseado al seleccionar */
+}
+a.d-block {
+  transition: background-image 0.3s ease, border-radius 0.3s ease;
+  border-radius: 8px; /* Borde inicial, si no es completamente redondo */
+}
 
-<div class="container-fluid my-3 py-3 tab-pane fade" id="project-list" role="tabpanel" aria-labelledby="project-list-tab">
-  <div class="row">
-    <div class="col-md-8 col-sm-10 mx-auto">
-      <form action="{% url 'generate_pdf' %}" method="get">
-        {% csrf_token %}
-        <div class="card my-sm-5 position-relative transform-transition">
-          <div class="card-header text-center position-relative header-size">
-            <div class="row justify-content-between">
-              <div class="navbar-brand m-0">
-                <img class="mb-2 w-25 p-2" src="{% static 'assets/img/imagen_01.png' %}" alt="Logo">
-                <h6>S89 Montauk Hwy. Copiague NY 11726</h6>
-                <p class="d-block text-secondary">tel: 631-842-2515 631-842-2780 fx</p>
-                <p class="d-block text-secondary">www.omgshowerdoors.com</p>
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="row">
-                <div class="col-12">
-                  <div class="table-responsive">
-                    <table class="details-table">
-                      <tr>
-                        <th colspan="2">SHIP TO</th>
-                        <th colspan="2">BILL TO</th>
-                      </tr>
-                      <tr>
-                        <td><label for="ship-name"><h6>Name:</h6></label></td>
-                        <td><input type="text" id="ship-name" value="Dan Ferrara" class="input-wide"></td>
-                        <td><label for="bill-company"><h6>Company:</h6></label></td>
-                        <td><input type="text" id="bill-company" value="[Your Company]" class="input-wide"></td>
-                      </tr>
-                      <tr>
-                        <td><label for="ship-address"><h6>Address:</h6></label></td>
-                        <td><input type="text" id="ship-address" value="1805 Laurel Way" class="input-wide"></td>
-                        <td><label for="bill-address"><h6>Address:</h6></label></td>
-                        <td><input type="text" id="bill-address" value="[Your Address]" class="input-wide"></td>
-                      </tr>
-                      <tr>
-                        <td><label for="ship-city"><h6>City:</h6></label></td>
-                        <td><input type="text" id="ship-city" value="Mattituck, NY" class="input-wide"></td>
-                        <td><label for="bill-city"><h6>City:</h6></label></td>
-                        <td><input type="text" id="bill-city" value="Mattituck, NY" class="input-wide"></td>
-                      </tr>
-                      <tr>
-                        <td><label for="ship-cell"><h6>Cell:</h6></label></td>
-                        <td><input type="text" id="ship-cell" value="914-659-0362" class="input-wide"></td>
-                        <td><label for="bill-phone"><h6>Phone:</h6></label></td>
-                        <td><input type="text" id="bill-phone" value="[Your Phone Number]" class="input-wide"></td>
-                      </tr>
-                      <tr>
-                        <td><label for="ship-email"><h6>Email:</h6></label></td>
-                        <td><input type="email" id="ship-email" value="danfer@verizon.net" class="input-wide"></td>
-                        <td><label for="bill-email"><h6>Email:</h6></label></td>
-                        <td><input type="email" id="bill-email" value="danfer@verizon.net" class="input-wide"></td>
-                      </tr>
-                    </table>
-                    <table class="details-table">
-                      <tr>
-                        <th>Handle</th>
-                        <td><input type="text" id="handle" value="N/A" class="input-full"></td>
-                        <th>Hardware Finish</th>
-                        <td><input type="text" id="hardware-finish" value="Polished Chrome" class="input-full"></td>
-                      </tr>
-                      <tr>
-                        <th>Glass Type</th>
-                        <td><input type="text" id="glass-type" value="Low Iron" class="input-full"></td>
-                        <th>Door Thickness</th>
-                        <td><input type="text" id="door-thickness" value="N/A" class="input-full"></td>
-                      </tr>
-                      <tr>
-                        <th>Stationary Panel</th>
-                        <td colspan="3">
-                          <input type="text" id="stationary-panel" value="Low Iron" class="input-full">
-                        </td>
-                      </tr>
-                    </table>
-                    <h4>Project Details</h4>
-                    <table class="info-table">
-                      <tr>
-                        <td>
-                          <strong>SHIP TO:</strong><br>
-                          <div class="position-relative input-with-image">
-                            <img id="selected-image-1" src="" alt="Name" class="image-adjusted">
-                            <input type="text" id="ship-name-left" placeholder="Medida1" class="input-small position-absolute">
-                            <input type="text" id="ship-name-center" placeholder="Medida2" class="input-medium position-absolute">
-                            <input type="text" id="ship-name-right" placeholder="Medida3" class="input-tiny position-absolute">
-                          </div>
-                        </td>
-                        <td>
-                          <strong>SHIP TO:</strong><br>
-                          <div class="position-relative input-with-image">
-                            <img id="selected-image-2" src="" alt="Name" class="image-adjusted">
-                            <input type="text" id="ship-name-left" placeholder="Medida1" class="input-small position-absolute">
-                            <input type="text" id="ship-name-center" placeholder="Medida2" class="input-medium position-absolute">
-                            <input type="text" id="ship-name-right" placeholder="Medida3" class="input-tiny position-absolute">
-                          </div>
-                        </td>
-                      </tr>
-                    </table>
-                    <input type="text" id="height" name="height" class="form-control" placeholder="Description">
-                   <br>
-                    <table class="details-table1">
-                      <tr>
-                        <th colspan="2" style="width: 352.17px; border-right: none;" data-selected="true" data-label-id="0">
-                          Cost Breakdown
-                        </th>
-                      </tr>
-                      <tr>
-                        <th scope="col">Description</th>
-                        <th scope="col">Amount</th>
-                      </tr>
-                      <tr>
-                        <td>Low Iron Glass</td>
-                        <td>$2,300</td>
-                      </tr>
-                      <tr>
-                        <td>50% Deposit</td>
-                        <td>$1,150</td>
-                      </tr>
-                      <tr>
-                        <td>Balance</td>
-                        <td>$1,150</td>
-                      </tr>
-                    </table>
-                <br>
-                    <table class="details-table1">
-                      <tr>
-                        <th h4="col" style="width: 352.17px; " data-selected="true" 
-                        data-label-id="0" >Balance to be paid in cash or Cheks </th>
-                        <td>
-                          <ul class="list-group">
-                            <li class="list-group-item border-0 px-0">
-                              <div class="form-check form-switch ps-0">
-                                <input class="form-check-input ms-auto" type="checkbox" id="flexSwitchCheckDefault3">
-                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0" for="flexSwitchCheckDefault3">Credit card payment</label>
-                              </div>
-                            </li>
-                            <li class="list-group-item border-0 px-0">
-                              <div class="form-check form-switch ps-0">
-                                <input class="form-check-input ms-auto" type="checkbox" id="flexSwitchCheckDefault4" checked="">
-                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0" for="flexSwitchCheckDefault4">Cash payment</label>
-                              </div>
-                            </li>
-                          </ul>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="col">Description</th>
-                        <th scope="col">Date</th>
-                      </tr>
-                      <tr>
-                        <td>CONTRACT APROVED</td>
-                        <td><input type="date" id="bill-email" value="" placeholder="Date" class="input-wide"></td>
-                      </tr>
-                      <tr>
-                        <td>WORK COMPLETED SASTIFACTION</td>
-                        <td><input type="date" id="bill-email" value="" placeholder="Date" class="input-wide"></td>
-                      </tr>
-        
-                    </table>
-                     <button class="btn bg-gradient-info mt-lg-7 mb-0" type="submit" name="button">Print</button>
-                      
-                  </div>
-                </div>
-              </div>
-            </div>
-           
-          </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-    <!-- Contenido de la pestaña "Settings" -->
-    <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
-      <h3>Settings</h3>
-      <p>Contenido relacionado con Settings.</p>
-    </div>
-  </div>
-  {% include 'includes/footer.html' %}
-
-</div>
-
-
-<script>
- const selectableImages = document.getElementById('selectable-images');
-const relatedImagesContainer = document.getElementById('related-images');
-const selectedImageDest1 = document.getElementById('selected-image-1'); // Contenedor para la imagen 1
-const selectedImageDest2 = document.getElementById('selected-image-2'); // Contenedor para la imagen 2
-const selectedImages = new Set(); // Usamos un Set para evitar duplicados
-let selectedImagesArray = []; // Para almacenar las imágenes seleccionadas
-
-// Evento para seleccionar las imágenes principales
-selectableImages.addEventListener('click', (event) => {
-  const img = event.target;
-
-  if (img.tagName === 'IMG') {
-    const imgId = img.dataset.id;
-
-    // Añadir o quitar la imagen seleccionada
-    if (selectedImages.has(imgId)) {
-      selectedImages.delete(imgId);
-      img.classList.remove('selected');
-    } else if (selectedImages.size < 2) {
-      selectedImages.add(imgId);
-      img.classList.add('selected');
-      console.log(selectedImages);
-    }
-
-    // Mostrar imágenes relacionadas si hay dos seleccionadas o si la imagen tiene data-id "12" o "13"
-    if (selectedImages.size === 2 || imgId === '12' || imgId === '13') {
-      showRelatedImages([...selectedImages]);
-    } else {
-      relatedImagesContainer.innerHTML = ''; // Limpiar las imágenes relacionadas
-    }
-  }
-});
-
-// Función para mostrar imágenes relacionadas
-function showRelatedImages(selected) {
-  relatedImagesContainer.innerHTML = ''; // Limpiar imágenes previas
-
-  const relatedImages = {
-    '1.1-2.1': ["{% static 'assets/img/4.jpg' %}", "{% static 'assets/img/3.jpg' %}","{% static 'assets/img/4.jpg' %}", "{% static 'assets/img/3.jpg' %}"],
-        '1.1-2.2': ["{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}","{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}"],
-        '1.1-2.3': ["{% static 'assets/img/6.png' %}", "{% static 'assets/img/6.png' %}","{% static 'assets/img/6.png' %}", "{% static 'assets/img/6.png' %}"],
-        '1.1-2.4': ["{% static 'assets/img/Single.png' %}", "{% static 'assets/img/Single.png' %}","{% static 'assets/img/Single.png' %}", "{% static 'assets/img/Single.png' %}"],
-        '1.1-2.5': ["{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}","{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}"],
-
-        '1.2-2.1': ["{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}","{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}"],
-        '1.2-2.2': ["{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}","{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}"],
-        '1.2-2.3': ["{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}","{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}"],
-        '1.2-2.4': ["{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}","{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}"],
-        '1.2-2.5': ["{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}","{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}"],
-
-        '1.3-2.1': ["{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}","{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}"],
-        '1.3-2.2': ["{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}","{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}"],
-        '1.3-2.3': ["{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}","{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}"],
-        '1.3-2.4': ["{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}","{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}"],
-        '1.3-2.5': ["{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}","{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}"],
-
-        '12': ["{% static 'assets/img/14.jpg' %}", "{% static 'assets/img/15.gif' %}","{% static 'assets/img/16.gif' %}", "{% static 'assets/img/17.jpg' %}"],
-        '13': ["{% static 'assets/img/14.jpg' %}", "{% static 'assets/img/15.gif' %}","{% static 'assets/img/16.gif' %}", "{% static 'assets/img/17.jpg' %}"],
-    // Agrega más combinaciones aquí
-  };
-
-  const key = selected.sort().join('-');
-  const imagesToShow = relatedImages[key] || [];
-
-  imagesToShow.forEach(src => {
-    // Crear un nuevo contenedor para cada imagen relacionada
-    const div = document.createElement('div');
-    div.classList.add('text-center', 'me-2');
-
-    const img = document.createElement('img');
-    img.src = src;
-    img.alt = '3D Avatar';
-    img.classList.add('avatar3d');
-
-    // Añadir un evento para seleccionar solo una imagen de las relacionadas
-    img.addEventListener('click', function() {
-      // Desmarcar cualquier imagen previamente seleccionada
-      const previouslySelected = document.querySelector('#related-images img.selected');
-      if (previouslySelected) {
-        previouslySelected.classList.remove('selected');
-      }
-
-      // Seleccionar la imagen actual
-      img.classList.add('selected');
-
-      // Actualizar las imágenes de destino con las imágenes seleccionadas
-      if (selectedImagesArray.length < 2) {
-        selectedImagesArray.push(src);
-      }
-
-      if (selectedImagesArray.length === 1) {
-        selectedImageDest1.src = src; // Cambiar el src de la primera imagen
-      } else {
-        selectedImageDest2.src = src; // Cambiar el src de la segunda imagen
-      }
-    });
-
-    div.appendChild(img);
-    relatedImagesContainer.appendChild(div);
-  });
+a.d-block:hover {
+  background-image: linear-gradient(310deg, #7928CA 0%, #FF0080 100%);
+  border-radius: 2%; /* Cambia a forma completamente redonda */
+  color: white; /* Cambia el color del texto (opcional) */
 }
 
 
-</script>
-{% endblock content %}
+
+a.d-block.active {
+  background-image: linear-gradient(310deg, #7928CA 0%, #FF0080 100%);
+  border-radius: 2%; /* Cambia a forma completamente redonda */
+  color: white; /* Cambia el color del texto (opcional) */
+}
+
+li.d1-block:hover {
+  background-image: linear-gradient(310deg, #7928CA 0%, #FF0080 100%);
+  border-radius: 2%; /* Cambia a forma completamente redonda */
+  color: white; /* Cambia el color del texto (opcional) */
+}
+
+li.d1-block {
+  transition: background-image 0.3s ease, border-radius 0.3s ease;
+  border-radius: 8px; /* Borde inicial, si no es completamente redondo */
+}
+li.d1-block.active {
+  background-image: linear-gradient(310deg, #7928CA 0%, #FF0080 100%);
+  border-radius: 2%; /* Cambia a forma completamente redonda */
+  color: white; /* Cambia el color del texto (opcional) */
+}
+  </style>
+<div class="container mt-4">
+  <!-- Barra de navegación con pestañas -->
+  <div class="container-fluid mt-4">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8">
+        <ul class="nav nav-pills nav-fill" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" data-bs-toggle="tab" href="#invoice" role="tab" aria-selected="true">
+              Layout Template
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#project-list" role="tab" aria-selected="false">
+              Hadware
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#settings" role="tab" aria-selected="false">
+              Notifications
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <br>
+  <!-- Contenido de IMAGeNeS -->
+  <div class="tab-content">
+    <div class="tab-pane fade show active" id="invoice" role="tabpanel">
+      <div class="row ">
+        <div class="col-12 col-md-6 border-right">
+          <h6>TYPE</h6>
+          <div class="row ">
+            <!-- Columna 1 con 3 imágenes -->
+            <figure class="col-12 col-md-2 p-0 mb-0 rotate-3d selectable">
+              <img src="{% static 'assets/img/1.png' %}" alt="Necromancer" class="img-fluid">
+              <figcaption class="text-center text-muted">Inline</figcaption>
+            </figure>
+            <figure class="col-12 col-md-2 p-0 mb-0 rotate-3d selectable">
+              <img src="{% static 'assets/img/2.png' %}" alt="Necromancer" class="img-fluid">
+              <figcaption class="text-center text-muted">Right Angle</figcaption>
+            </figure>
+            <figure class="col-12 col-md-2 p-0 mb-0 rotate-3d selectable">
+              <img src="{% static 'assets/img/6.png' %}" alt="Necromancer" class="img-fluid">
+              <figcaption class="text-center text-muted">Neo</figcaption>
+            </figure>
+          </div>
+          <br>
+          <h6>Doors</h6>
+          <div class="row ">
+            <!-- Columna 1 con 5 imágenes -->
+            <figure class="col-12 col-md-2 p-0 mb-0 rotate-3d selectable1">
+              <img src="{% static 'assets/img/Single.png' %}" alt="Necromancer" class="img-fluid">
+              <figcaption class="text-center text-muted">Single</figcaption>
+            </figure>
+            <figure class="col-12 col-md-2 p-0 mb-0 rotate-3d selectable1">
+              <img src="{% static 'assets/img/Double.png' %}" alt="Necromancer" class="img-fluid">
+              <figcaption class="text-center text-muted">Double</figcaption>
+            </figure>
+            <figure class="col-12 col-md-2 p-0 mb-0 rotate-3d selectable1">
+              <img src="{% static 'assets/img/Bifold.png' %}" alt="Necromancer" class="img-fluid">
+              <figcaption class="text-center text-muted">Bifold</figcaption>
+            </figure>
+            <figure class="col-12 col-md-2 p-0 mb-0 rotate-3d selectable1">
+              <img src="{% static 'assets/img/SingleSliding.png' %}" alt="Necromancer" class="img-fluid">
+              <figcaption class="text-center text-muted">Single Sliding</figcaption>
+            </figure>
+            <figure class="col-12 col-md-2 p-0 mb-0 rotate-3d selectable1">
+              <img src="{% static 'assets/img/DoubleSliding.png' %}" alt="Necromancer" class="img-fluid">
+              <figcaption class="text-center text-muted">Double Sliden</figcaption>
+            </figure>
+          </div>
+          <br>
+          <h6>Sliden Direction</h6>
+          <!-- Columna 1 con 5 imágenes -->
+          <div class="row ">
+            <figure class="col-12 col-md-2 p-0 mb-0 rotate-3d selectable2">
+              <img src="{% static 'assets/img/Single.png' %}" alt="Necromancer" class="img-fluid">
+              <figcaption class="text-center text-muted">Left</figcaption>
+            </figure>
+            <figure class="col-12 col-md-2 p-0 mb-0 rotate-3d selectable2">
+              <img src="{% static 'assets/img/Right.png' %}" alt="Necromancer" class="img-fluid">
+              <figcaption class="text-center text-muted">Right</figcaption>
+            </figure>
+          </div>
+          <br>
+          <h6>Transom</h6>
+          <div class="row ">
+            <figure class="col-12 col-md-2 p-0 mb-0 rotate-3d selectable3">
+              <img src="{% static 'assets/img/StackedTransform.png' %}" alt="Necromancer" class="img-fluid">
+              <figcaption class="text-center text-muted">Stacked Transform</figcaption>
+            </figure>
+            <figure class="col-12 col-md-2 p-0 mb-0 rotate-3d selectable3">
+              <img src="{% static 'assets/img/HeadGap.png' %}" alt="Necromancer" class="img-fluid">
+              <figcaption class="text-center text-muted">Head Gap</figcaption>
+            </figure>
+            <figure class="col-12 col-md-2 p-0 mb-0 rotate-3d selectable3">
+              <img src="{% static 'assets/img/OperableTransform.png' %}" alt="Necromancer" class="img-fluid">
+              <figcaption class="text-center text-muted">Operable Transform</figcaption>
+            </figure>
+            <figure class="col-12 col-md-2 p-0 mb-0 rotate-3d selectable3">
+              <img src="{% static 'assets/img/FixedTransform.png' %}" alt="Necromancer" class="img-fluid">
+              <figcaption class="text-center text-muted">Fixed Transform</figcaption>
+            </figure>
+            <figure class="col-12 col-md-2 p-0 mb-0 rotate-3d selectable3">
+              <img src="{% static 'assets/img/NoTransform.png' %}" alt="Necromancer" class="img-fluid">
+              <figcaption class="text-center text-muted">No Transform</figcaption>
+            </figure>
+          </div>
+        </div>
+        <!-- Columna 2 con 4 imágenes (más pequeñas) -->
+        <div class="col-12 col-md-6 border-right">
+          <div class="row g-0 ">
+            <!-- Imagen 1 -->
+            <figure class="col-12 col-md-3 mb-3 selectable4">
+              <img src="{% static 'assets/img/1.1.1.1.1.png' %}" alt="Necromancer" class="img-fluid">
+            </figure>
+            <!-- Imagen 2 -->
+            <figure class="col-12 col-md-3 mb-3 selectable4">
+              <img src="{% static 'assets/img/1.1.1.1.2.png' %}" alt="Necromancer" class="img-fluid">
+
+            </figure>
+            <!-- Imagen 3 -->
+            <figure class="col-12 col-md-3 mb-3 selectable4">
+              <img src="{% static 'assets/img/1.1.1.1.3.png' %}" alt="Necromancer" class="img-fluid">
+            </figure>
+            <!-- Imagen 4 -->
+            <figure class="col-12 col-md-3 mb-3 selectable4">
+              <img src="{% static 'assets/img/1.1.1.1.4.png' %}" alt="Necromancer" class="img-fluid">
+            </figure>
+          </div>
+          <div class="row g-0 ">
+            <!-- Imagen 1 -->
+            <figure class="col-12 col-md-3 mb-3 selectable4">
+              <img src="{% static 'assets/img/1.1.1.1.1.png' %}" alt="Necromancer" class="img-fluid">
+            </figure>
+            <!-- Imagen 2 -->
+            <figure class="col-12 col-md-3 mb-3 selectable4">
+              <img src="{% static 'assets/img/1.1.1.1.2.png' %}" alt="Necromancer" class="img-fluid">
+            </figure>
+            <!-- Imagen 3 -->
+            <figure class="col-12 col-md-3 mb-3 selectable4">
+              <img src="{% static 'assets/img/1.1.1.1.3.png' %}" alt="Necromancer" class="img-fluid">
+            </figure>
+            <!-- Imagen 4 -->
+            <figure class="col-12 col-md-3 mb-3 selectable4">
+              <img src="{% static 'assets/img/1.1.1.1.4.png' %}" alt="Necromancer" class="img-fluid">
+            </figure>
+          </div>
+          <div class="row g-0 ">
+            <!-- Imagen 1 -->
+            <figure class="col-12 col-md-3 mb-3 selectable4">
+              <img src="{% static 'assets/img/1.1.1.1.1.png' %}" alt="Necromancer" class="img-fluid">
+
+            </figure>
+            <!-- Imagen 2 -->
+            <figure class="col-12 col-md-3 mb-3 selectable4">
+              <img src="{% static 'assets/img/1.1.1.1.2.png' %}" alt="Necromancer" class="img-fluid">
+            </figure>
+            <!-- Imagen 3 -->
+            <figure class="col-12 col-md-3 mb-3 selectable4">
+              <img src="{% static 'assets/img/1.1.1.1.3.png' %}" alt="Necromancer" class="img-fluid">
+            </figure>
+            <!-- Imagen 4 -->
+            <figure class="col-12 col-md-3 mb-3 selectable4">
+              <img src="{% static 'assets/img/1.1.1.1.4.png' %}" alt="Necromancer" class="img-fluid">
+            </figure>
+          </div>
+          <div class="row g-0 ">
+            <!-- Imagen 1 -->
+            <figure class="col-12 col-md-3 mb-3 selectable4">
+              <img src="{% static 'assets/img/1.1.1.1.1.png' %}" alt="Necromancer" class="img-fluid">
+            </figure>
+            <!-- Imagen 2 -->
+            <figure class="col-12 col-md-3 mb-3 selectable4">
+              <img src="{% static 'assets/img/1.1.1.1.2.png' %}" alt="Necromancer" class="img-fluid">
+            </figure>
+            <!-- Imagen 3 -->
+            <figure class="col-12 col-md-3 mb-3 selectable4">
+              <img src="{% static 'assets/img/1.1.1.1.3.png' %}" alt="Necromancer" class="img-fluid">
+            </figure>
+            <!-- Imagen 4 -->
+            <figure class="col-12 col-md-3 mb-3 selectable4">
+              <img src="{% static 'assets/img/1.1.1.1.4.png' %}" alt="Necromancer" class="img-fluid">
+            </figure>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Pestaña "HADWARE" -->
+    <div class="tab-pane fade" id="project-list" role="tabpanel">
+      <div class="container-fluid py-4">
+        <div class="row">
+          <div class="col-4">
+            <div class="card blur shadow-blur max-height-vh-70 overflow-auto overflow-x-hidden mb-5 mb-lg-0">
+              <h6>Filter</h6>
+              <div class="card-body p-2">
+                <a href="javascript:;" class="d-block p-2 image-selector">
+                  <div class="d-flex p-2">
+                    <img alt="Image" src="{% static 'assets/img/clamps.png' %}" class="avatar shadow">
+                    <div class="ms-3">
+                      <div class="justify-content-between align-items-center">
+                        <h6 class="mb-0">Clamps
+                        </h6>
+                        <span class="text-muted text-sm col-11 p-0 text-truncate d-block">20</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+                <a href="javascript:;" class="d-block p-2 image-selector">
+                  <div class="d-flex p-2">
+                    <img alt="Image" src="{% static 'assets/img/U_channel.jpeg' %}" class="avatar shadow">
+                    <div class="ms-3">
+                      <div class="justify-content-between align-items-center">
+                        <h6 class="mb-0">U-Channel
+                        </h6>
+                        <span class="text-muted text-sm col-11 p-0 text-truncate d-block">20</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+                <a href="javascript:;" class="d-block p-2 image-selector">
+                  <div class="d-flex p-2">
+                    <img alt="Image" src="{% static 'assets/img/handle1.png' %}" class="avatar shadow">
+                    <div class="ms-3">
+                      <h6 class="mb-0">Handle</h6>
+
+                      <span class="text-muted text-sm col-11 p-0 text-truncate d-block">20</span>
+                    </div>
+                  </div>
+                </a>
+                <a href="javascript:;" class="d-block p-2 image-selector">
+                  <div class="d-flex p-2">
+                    <img alt="Image" src="{% static 'assets/img/hinge.png' %}" class="avatar shadow">
+                    <div class="ms-3">
+                      <h6 class="mb-0">Hinge</h6>
+
+                      <span class="text-muted text-sm col-11 p-0 text-truncate d-block">10</span>
+                    </div>
+                  </div>
+                </a>
+                <a href="javascript:;" class="d-block p-2 image-selector">
+                  <div class="d-flex p-2">
+                    <img alt="Image" src="{% static 'assets/img/header.jpg' %}" class="avatar shadow">
+                    <div class="ms-3">
+                      <div class="justify-content-between align-items-center">
+                        <h6 class="mb-0">Header</h6>
+                      </div>
+                      <span class="text-muted text-sm col-11 p-0 text-truncate d-block">4</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-8">
+            <div class="card blur shadow-blur max-height-vh-70">
+              <div class="card-header shadow-lg">
+                <div class="row">
+                  <div class="col-md-10">
+                    <div class="d-flex align-items-center" id="image-display">
+                      <img alt="Image" src="{% static 'assets/img/U_channel.jpeg' %}" class="avatar"><br>
+                      <h6> </h6>
+                    </div>
+                    <div class="card-header p-3">
+                      
+                      <input type="email" class="form-control" placeholder="Search Hadware" aria-label="Email">
+                    </div>
+                  </div>
+                  <div class="col-1 my-auto pe-0">
+                    <button class="btn btn-primary">+ ADD</button>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body overflow-auto overflow-x-hidden">
+                <div class="row justify-content-start mb-md-8">
+                  <div class="container-fluid">
+                    <div class="row justify-content-center">
+                      <!-- Tarjeta Principal -->
+                      <div class="col-lg-8 col-md-10 col-sm-12" style="max-width: 100%; flex: 0 0 100%;">
+                        <!-- Encabezado -->
+                        <div class="row">
+                          <!-- Columna 1: Lista -->
+                          <div class="col-md-6 col-12 mb-4">
+
+                            <ul class="list-group">
+                              <li class="list-group-item d1-block image-selector1">
+                                
+                                <div class="d-flex justify-content-between align-items-center">
+                                  <!-- Contenedor para el texto a la izquierda -->
+                                  <div class="me-3">
+                                    <h6 class="mb-0">SDCD38</h6>
+                                    <span class="text-muted text-sm d-block"
+                                      style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                      Deep U Channel 3/8
+                                    </span>
+                                  </div>
+
+                                  <!-- Imagen a la derecha -->
+                                  <img alt="Image" src="{% static 'assets/img/U_channel.jpeg' %}" class="avatar shadow"
+                                    style="width: 40px; height: 40px;">
+                                </div>
+                               
+                              </li>
+
+                              <li class="list-group-item d1-block image-selector1">
+                                
+                                <div class="d-flex justify-content-between align-items-center">
+                                  <!-- Contenedor para el texto a la izquierda -->
+                                  <div class="me-3">
+                                    <h6 class="mb-0">SDCD38</h6>
+                                    <span class="text-muted text-sm d-block"
+                                      style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                      Deep U Channel 3/8
+                                    </span>
+                                  </div>
+
+                                  <!-- Imagen a la derecha -->
+                                  <img alt="Image" src="{% static 'assets/img/channel1.jpeg' %}" class="avatar shadow"
+                                    style="width: 40px; height: 40px;">
+                                </div>
+                              
+                              </li>
+                              <li class="list-group-item d1-block image-selector1">
+                                
+                                <div class="d-flex justify-content-between align-items-center">
+                                  <!-- Contenedor para el texto a la izquierda -->
+                                  <div class="me-3">
+                                    <h6 class="mb-0">SDCD38</h6>
+                                    <span class="text-muted text-sm d-block"
+                                      style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                      Deep U Channel 3/8
+                                    </span>
+                                  </div>
+
+                                  <!-- Imagen a la derecha -->
+                                  <img alt="Image" src="{% static 'assets/img/channel2.jpeg' %}" class="avatar shadow"
+                                    style="width: 40px; height: 40px;">
+                                </div>
+                               
+                              </li>
+                              <li class="list-group-item d1-block image-selector1">
+                                
+                                <div class="d-flex justify-content-between align-items-center">
+                                  <!-- Contenedor para el texto a la izquierda -->
+                                  <div class="me-3">
+                                    <h6 class="mb-0">SDCD38</h6>
+                                    <span class="text-muted text-sm d-block"
+                                      style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                      Deep U Channel 3/8
+                                    </span>
+                                  </div>
+
+                                  <!-- Imagen a la derecha -->
+                                  <img alt="Image" src="{% static 'assets/img/channel3.jpeg' %}" class="avatar shadow"
+                                    style="width: 40px; height: 40px;">
+                                </div>
+                              
+                              </li>
+                              <li class="list-group-item d1-block image-selector1">
+                                <div class="d-flex justify-content-between align-items-center">
+                                  <!-- Contenedor para el texto a la izquierda -->
+                                  <div class="me-3">
+                                    <h6 class="mb-0">SDCD38</h6>
+                                    <span class="text-muted text-sm d-block"
+                                      style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                      Deep U Channel 3/8
+                                    </span>
+                                  </div>
+                                  <!-- Imagen a la derecha -->
+                                  <img alt="Image" src="{% static 'assets/img/channel4.jpeg' %}" class="avatar shadow"
+                                    style="width: 40px; height: 40px;">
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+
+                          <!-- Columna 2: Imágenes -->
+                          <div class="col-md-6 col-12">
+                            <div class="row justify-content-center">
+                              <div class="col-12 mb-3 text-center" id="image-display1">
+                                <img src="{% static 'assets/img/channel5.jpeg' %}" alt="Imagen 1"
+                                  class="img-fluid rounded shadow">
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div> <!-- Pestaña "Settings" -->
+        </div>
+      </div>
+    </div>
+    <!-- Pestaña "Reporte" -->
+    <div class="container-fluid my-3 py-3 tab-pane fade" id="settings" role="tabpanel" aria-labelledby="project-list-tab">
+      <div class="row">
+        <div class="col-md-8 col-sm-10 mx-auto">
+          <form action="{% url 'generate_pdf' %}" method="get">
+            {% csrf_token %}
+            <div class="card my-sm-5 position-relative transform-transition">
+              <div class="card-header text-center position-relative header-size">
+                <div class="row justify-content-between">
+                  <div class="navbar-brand m-0">
+                    <img class="mb-2 w-25 p-2" src="{% static 'assets/img/imagen_01.png' %}" alt="Logo">
+                    <h6>S89 Montauk Hwy. Copiague NY 11726</h6>
+                    <p class="d-block text-secondary">tel: 631-842-2515 631-842-2780 fx</p>
+                    <p class="d-block text-secondary">www.omgshowerdoors.com</p>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="table-responsive">
+                        <table class="details-table">
+                          <tr>
+                            <th colspan="2">SHIP TO</th>
+                            <th colspan="2">BILL TO</th>
+                          </tr>
+                          <tr>
+                            <td><label for="ship-name"><h6>Name:</h6></label></td>
+                            <td><input type="text" id="ship-name" value="Dan Ferrara" class="input-wide"></td>
+                            <td><label for="bill-company"><h6>Company:</h6></label></td>
+                            <td><input type="text" id="bill-company" value="[Your Company]" class="input-wide"></td>
+                          </tr>
+                          <tr>
+                            <td><label for="ship-address"><h6>Address:</h6></label></td>
+                            <td><input type="text" id="ship-address" value="1805 Laurel Way" class="input-wide"></td>
+                            <td><label for="bill-address"><h6>Address:</h6></label></td>
+                            <td><input type="text" id="bill-address" value="[Your Address]" class="input-wide"></td>
+                          </tr>
+                          <tr>
+                            <td><label for="ship-city"><h6>City:</h6></label></td>
+                            <td><input type="text" id="ship-city" value="Mattituck, NY" class="input-wide"></td>
+                            <td><label for="bill-city"><h6>City:</h6></label></td>
+                            <td><input type="text" id="bill-city" value="Mattituck, NY" class="input-wide"></td>
+                          </tr>
+                          <tr>
+                            <td><label for="ship-cell"><h6>Cell:</h6></label></td>
+                            <td><input type="text" id="ship-cell" value="914-659-0362" class="input-wide"></td>
+                            <td><label for="bill-phone"><h6>Phone:</h6></label></td>
+                            <td><input type="text" id="bill-phone" value="[Your Phone Number]" class="input-wide"></td>
+                          </tr>
+                          <tr>
+                            <td><label for="ship-email"><h6>Email:</h6></label></td>
+                            <td><input type="email" id="ship-email" value="danfer@verizon.net" class="input-wide"></td>
+                            <td><label for="bill-email"><h6>Email:</h6></label></td>
+                            <td><input type="email" id="bill-email" value="danfer@verizon.net" class="input-wide"></td>
+                          </tr>
+                        </table>
+                        <table class="details-table">
+                          <tr>
+                            <th>Handle</th>
+                            <td><input type="text" id="handle" value="N/A" class="input-full"></td>
+                            <th>Hardware Finish</th>
+                            <td><input type="text" id="hardware-finish" value="Polished Chrome" class="input-full"></td>
+                          </tr>
+                          <tr>
+                            <th>Glass Type</th>
+                            <td><input type="text" id="glass-type" value="Low Iron" class="input-full"></td>
+                            <th>Door Thickness</th>
+                            <td><input type="text" id="door-thickness" value="N/A" class="input-full"></td>
+                          </tr>
+                          <tr>
+                            <th>Stationary Panel</th>
+                            <td colspan="3">
+                              <input type="text" id="stationary-panel" value="Low Iron" class="input-full">
+                            </td>
+                          </tr>
+                        </table>
+                        <h4>Project Details</h4>
+                        <table class="info-table">
+                          <tr>
+                            <td>
+                              <strong>SHIP TO:</strong><br>
+                              <div class="position-relative input-with-image">
+                                <img id="image-display" src="" alt="Name" class="image-adjusted">
+                                <input type="text" id="ship-name-left" placeholder="Medida1" class="input-small position-absolute">
+                                <input type="text" id="ship-name-center" placeholder="Medida2" class="input-medium position-absolute">
+                                <input type="text" id="ship-name-right" placeholder="Medida3" class="input-tiny position-absolute">
+                              </div>
+                            </td>
+                            <td>
+                              <strong>SHIP TO:</strong><br>
+                              <div class="position-relative input-with-image">
+                                <img id="image-display1" src="" alt="Name" class="image-adjusted">
+                                <input type="text" id="ship-name-left" placeholder="Medida1" class="input-small position-absolute">
+                                <input type="text" id="ship-name-center" placeholder="Medida2" class="input-medium position-absolute">
+                                <input type="text" id="ship-name-right" placeholder="Medida3" class="input-tiny position-absolute">
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+                        <input type="text" id="height" name="height" class="form-control" placeholder="Description">
+                       <br>
+                        <table class="details-table1">
+                          <tr>
+                            <th colspan="2" style="width: 352.17px; border-right: none;" data-selected="true" data-label-id="0">
+                              Cost Breakdown
+                            </th>
+                          </tr>
+                          <tr>
+                            <th scope="col">Description</th>
+                            <th scope="col">Amount</th>
+                          </tr>
+                          <tr>
+                            <td>Low Iron Glass</td>
+                            <td>$2,300</td>
+                          </tr>
+                          <tr>
+                            <td>50% Deposit</td>
+                            <td>$1,150</td>
+                          </tr>
+                          <tr>
+                            <td>Balance</td>
+                            <td>$1,150</td>
+                          </tr>
+                        </table>
+                    <br>
+                        <table class="details-table1">
+                          <tr>
+                            <th h4="col" style="width: 352.17px; " data-selected="true" 
+                            data-label-id="0" >Balance to be paid in cash or Cheks </th>
+                            <td>
+                              <ul class="list-group">
+                                <li class="list-group-item border-0 px-0">
+                                  <div class="form-check form-switch ps-0">
+                                    <input class="form-check-input ms-auto" type="checkbox" id="flexSwitchCheckDefault3">
+                                    <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0" for="flexSwitchCheckDefault3">Credit card payment</label>
+                                  </div>
+                                </li>
+                                <li class="list-group-item border-0 px-0">
+                                  <div class="form-check form-switch ps-0">
+                                    <input class="form-check-input ms-auto" type="checkbox" id="flexSwitchCheckDefault4" checked="">
+                                    <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0" for="flexSwitchCheckDefault4">Cash payment</label>
+                                  </div>
+                                </li>
+                              </ul>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="col">Description</th>
+                            <th scope="col">Date</th>
+                          </tr>
+                          <tr>
+                            <td>CONTRACT APROVED</td>
+                            <td><input type="date" id="bill-email" value="" placeholder="Date" class="input-wide"></td>
+                          </tr>
+                          <tr>
+                            <td>WORK COMPLETED SASTIFACTION</td>
+                            <td><input type="date" id="bill-email" value="" placeholder="Date" class="input-wide"></td>
+                          </tr>
+            
+                        </table>
+                         <button class="btn bg-gradient-info mt-lg-7 mb-0" type="submit" name="button">Print</button>
+                          
+                      </div>
+                    </div>
+                  </div>
+                </div>
+               
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <script>
+        document.querySelectorAll('figure.selectable').forEach(figure => {
+  figure.addEventListener('click', () => {
+    // Remueve la clase activa de los otros elementos
+    document.querySelectorAll('figure.selectable').forEach(el => el.classList.remove('active'));
+    // Agrega la clase activa al elemento seleccionado
+    figure.classList.add('active');
+  });
+});
+document.querySelectorAll('figure.selectable1').forEach(figure => {
+  figure.addEventListener('click', () => {
+    // Remueve la clase activa de los otros elementos
+    document.querySelectorAll('figure.selectable1').forEach(el => el.classList.remove('active'));
+    // Agrega la clase activa al elemento seleccionado
+    figure.classList.add('active');
+  });
+});
+document.querySelectorAll('figure.selectable2').forEach(figure => {
+  figure.addEventListener('click', () => {
+    // Remueve la clase activa de los otros elementos
+    document.querySelectorAll('figure.selectable2').forEach(el => el.classList.remove('active'));
+    // Agrega la clase activa al elemento seleccionado
+    figure.classList.add('active');
+  });
+});
+document.querySelectorAll('figure.selectable3').forEach(figure => {
+  figure.addEventListener('click', () => {
+    // Remueve la clase activa de los otros elementos
+    document.querySelectorAll('figure.selectable3').forEach(el => el.classList.remove('active'));
+    // Agrega la clase activa al elemento seleccionado
+    figure.classList.add('active');
+  });
+});
+document.querySelectorAll('figure.selectable4').forEach(figure => {
+  figure.addEventListener('click', () => {
+    // Remueve la clase activa de los otros elementos
+    document.querySelectorAll('figure.selectable4').forEach(el => el.classList.remove('active'));
+    // Agrega la clase activa al elemento seleccionado
+    figure.classList.add('active');
+  });
+});
+document.querySelectorAll('a.d-block').forEach(link => {
+  link.addEventListener('click', () => {
+    // Remueve la clase activa de los otros enlaces
+    document.querySelectorAll('a.d-block').forEach(el => el.classList.remove('active'));
+    // Agrega la clase activa al enlace seleccionado
+    link.classList.add('active');
+  });
+});
+document.querySelectorAll('li.d1-block').forEach(link => {
+  link.addEventListener('click', () => {
+    // Remueve la clase activa de los otros enlaces
+    document.querySelectorAll('li.d1-block').forEach(el => el.classList.remove('active'));
+    // Agrega la clase activa al enlace seleccionado
+    link.classList.add('active');
+  });
+});
+// Selecciona todos los enlaces con la clase 'image-selector'
+document.querySelectorAll('.image-selector').forEach(anchor => {
+  anchor.addEventListener('click', (event) => {
+    event.preventDefault(); // Evita el comportamiento por defecto del enlace
+    
+    // Obtén la imagen dentro del enlace
+    const img = anchor.querySelector('img');
+    const title = anchor.querySelector('h6').innerText;
+    const text = anchor.querySelector('span').innerText;
+    
+    // Obtén el contenedor donde se mostrará la imagen
+    const displayContainer = document.getElementById('image-display');
+    
+    // Limpia el contenedor
+    displayContainer.innerHTML = '';
+    
+    // Crea una copia de la imagen
+    const newImg = document.createElement('img');
+    newImg.src = img.src;
+    newImg.alt = img.alt;
+    newImg.className = 'avatar'; // Clase para estilo (opcional)
+
+
+    // Crea elementos para el texto
+    const newTitle = document.createElement('h6');
+    newTitle.innerText = title;
+    newTitle.className = 'displayed-title'; // Clase para estilo (opcional)
+    
+    const newText = document.createElement('span');
+    newText.innerText = text;
+    newText.className = 'displayed-text'; // Clase para estilo (opcional)
+    
+    // Inserta la imagen en el contenedor
+    displayContainer.appendChild(newImg);
+    displayContainer.appendChild(newTitle);
+  });
+});
+
+// Selecciona todos los enlaces con la clase 'image-selector1'
+document.querySelectorAll('.image-selector1').forEach(anchor => {
+  anchor.addEventListener('click', (event) => {
+    event.preventDefault(); // Evita el comportamiento por defecto del enlace
+    
+    // Obtén la imagen dentro del enlace
+    const img = anchor.querySelector('img');
+    const title = anchor.querySelector('h6').innerText;
+    const text = anchor.querySelector('span').innerText;
+    
+    // Obtén el contenedor donde se mostrará la imagen
+    const displayContainer = document.getElementById('image-display1');
+    
+    // Limpia el contenedor
+    displayContainer.innerHTML = '';
+    
+    // Crea una copia de la imagen
+    const newImg = document.createElement('img');
+    newImg.src = img.src;
+    newImg.alt = img.alt;
+    
+
+
+    // Crea elementos para el texto
+    const newTitle = document.createElement('h6');
+    newTitle.innerText = title;
+    newTitle.className = 'displayed-title'; // Clase para estilo (opcional)
+    
+    const newText = document.createElement('span');
+    newText.innerText = text;
+    newText.className = 'displayed-text'; // Clase para estilo (opcional)
+    
+    // Inserta la imagen en el contenedor
+    displayContainer.appendChild(newImg);
+  
+  });
+});
+
+        const selectableImages = document.getElementById('selectable-images');
+        const relatedImagesContainer = document.getElementById('related-images');
+        const selectedImageDest1 = document.getElementById('selected-image-1'); // Contenedor para la imagen 1
+        const selectedImageDest2 = document.getElementById('selected-image-2'); // Contenedor para la imagen 2
+        const selectedImages = new Set(); // Usamos un Set para evitar duplicados
+        let selectedImagesArray = []; // Para almacenar las imágenes seleccionadas
+
+        // Evento para seleccionar las imágenes principales
+        selectableImages.addEventListener('click', (event) => {
+          const img = event.target;
+
+          if (img.tagName === 'IMG') {
+            const imgId = img.dataset.id;
+
+            // Añadir o quitar la imagen seleccionada
+            if (selectedImages.has(imgId)) {
+              selectedImages.delete(imgId);
+              img.classList.remove('selected');
+            } else if (selectedImages.size < 2) {
+              selectedImages.add(imgId);
+              img.classList.add('selected');
+              console.log(selectedImages);
+            }
+
+            // Mostrar imágenes relacionadas si hay dos seleccionadas o si la imagen tiene data-id "12" o "13"
+            if (selectedImages.size === 2 || imgId === '12' || imgId === '13') {
+              showRelatedImages([...selectedImages]);
+            } else {
+              relatedImagesContainer.innerHTML = ''; // Limpiar las imágenes relacionadas
+            }
+          }
+        });
+
+        // Función para mostrar imágenes relacionadas
+        function showRelatedImages(selected) {
+          relatedImagesContainer.innerHTML = ''; // Limpiar imágenes previas
+
+          const relatedImages = {
+            '1.1-2.1': ["{% static 'assets/img/1.png' %}", "{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/4.jpg' %}", "{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}"],
+            '1.1-2.2': ["{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}"],
+            '1.1-2.3': ["{% static 'assets/img/6.png' %}", "{% static 'assets/img/6.png' %}", "{% static 'assets/img/6.png' %}", "{% static 'assets/img/6.png' %}"],
+            '1.1-2.4': ["{% static 'assets/img/Single.png' %}", "{% static 'assets/img/Single.png' %}", "{% static 'assets/img/Single.png' %}", "{% static 'assets/img/Single.png' %}"],
+            '1.1-2.5': ["{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}"],
+
+            '1.2-2.1': ["{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}"],
+            '1.2-2.2': ["{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}"],
+            '1.2-2.3': ["{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}"],
+            '1.2-2.4': ["{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}"],
+            '1.2-2.5': ["{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}", "{% static 'assets/img/3.jpg' %}"],
+
+            '1.3-2.1': ["{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}"],
+            '1.3-2.2': ["{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}"],
+            '1.3-2.3': ["{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}"],
+            '1.3-2.4': ["{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}"],
+            '1.3-2.5': ["{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}", "{% static 'assets/img/2.jpg' %}"],
+
+            '12': ["{% static 'assets/img/14.jpg' %}", "{% static 'assets/img/15.gif' %}", "{% static 'assets/img/16.gif' %}", "{% static 'assets/img/17.jpg' %}"],
+            '13': ["{% static 'assets/img/14.jpg' %}", "{% static 'assets/img/15.gif' %}", "{% static 'assets/img/16.gif' %}", "{% static 'assets/img/17.jpg' %}"],
+            // Agrega más combinaciones aquí
+          };
+
+          const key = selected.sort().join('-');
+          const imagesToShow = relatedImages[key] || [];
+
+          imagesToShow.forEach(src => {
+            // Crear un nuevo contenedor para cada imagen relacionada
+            const div = document.createElement('div');
+            div.classList.add('text-center', 'me-2');
+
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = '3D Avatar';
+            img.classList.add('avatar4d');
+
+            // Añadir un evento para seleccionar solo una imagen de las relacionadas
+            img.addEventListener('click', function () {
+              // Desmarcar cualquier imagen previamente seleccionada
+              const previouslySelected = document.querySelector('#related-images img.selected');
+              if (previouslySelected) {
+                previouslySelected.classList.remove('selected');
+              }
+
+              // Seleccionar la imagen actual
+              img.classList.add('selected');
+
+              // Actualizar las imágenes de destino con las imágenes seleccionadas
+              if (selectedImagesArray.length < 2) {
+                selectedImagesArray.push(src);
+              }
+
+              if (selectedImagesArray.length === 1) {
+                selectedImageDest1.src = src; // Cambiar el src de la primera imagen
+              } else {
+                selectedImageDest2.src = src; // Cambiar el src de la segunda imagen
+              }
+            });
+
+            div.appendChild(img);
+            relatedImagesContainer.appendChild(div);
+          });
+        }
+
+
+      </script>
+      {% endblock content %}

@@ -3,7 +3,109 @@
 
 {% block content %}
 <style>
-  
+  #drawingCanvas {
+    margin-bottom: 50px;
+    /* Añade espacio entre el canvas y la imagen */
+  }
+
+  #selected-image {
+    margin-top: 30%;
+    /* Añade espacio adicional entre la imagen y el canvas */
+    max-width: 90%;
+    /* Ajusta el ancho máximo al 90% del contenedor */
+    max-height: 150px;
+    /* Ajusta la altura máxima a 150px */
+    width: auto;
+    /* Mantén la proporción del ancho */
+    height: auto;
+    /* Mantén la proporción de la altura */
+    display: none;
+    /* Oculta la imagen por defecto */
+  }
+
+  .container1 {
+    position: relative;
+
+    margin: 20px auto;
+  }
+
+  .line {
+    position: absolute;
+    background-color: red;
+    cursor: grab;
+    opacity: 0.8;
+  }
+
+  .line.horizontal {
+    width: 100px;
+    height: 2px;
+  }
+
+  .line.vertical {
+    width: 2px;
+    height: 100px;
+  }
+
+  .line.diagonal {
+    width: 2px;
+    height: 100px;
+    transform-origin: top left;
+    background-color: green;
+  }
+
+  .line .resize-handle {
+    position: absolute;
+    background-color: blue;
+    width: 10px;
+    height: 10px;
+    cursor: pointer;
+  }
+
+  .line.horizontal .resize-handle {
+    bottom: -5px;
+    right: -5px;
+  }
+
+  .line.vertical .resize-handle {
+    top: -5px;
+    right: -5px;
+  }
+
+  .line.diagonal .resize-handle {
+    bottom: -5px;
+    right: -5px;
+  }
+
+  .line input {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    width: 50px;
+    height: 20px;
+    text-align: center;
+    font-size: 12px;
+    z-index: 10;
+  }
+
+  .line.horizontal input {
+    left: 50%;
+    transform: translateX(-50%);
+    top: -15px;
+  }
+
+  .line.vertical input {
+    top: 50%;
+    transform: translateY(-50%);
+    left: -25px;
+  }
+
+  .line.diagonal input {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+</style>
+<style>
   .details-table2 {
     border-collapse: collapse;
     width: 100%;
@@ -459,7 +561,7 @@
             <!-- Columna 1 con 3 imágenes -->
             <figure class="col-12 col-md-2 p-0 mb-0 rotate-3d selectable">
               <img src="{% static 'assets/img/1.png' %}" alt="Necromancer" class="img-fluid">
-              <figcaption class="text-center text-muted">Inline</figcaption>
+
             </figure>
             <figure class="col-12 col-md-2 p-0 mb-0 rotate-3d selectable">
               <img src="{% static 'assets/img/2.png' %}" alt="Necromancer" class="img-fluid">
@@ -1169,385 +1271,405 @@
             <!-- Card IMAGES -->
             <div class="card mt-4" id="password">
               <div class="row">
-                <div class="col-md-6">
-                  <div class="card card-profile card-plain">
-                    <div class="card-body text-center bg-white shadow border-radius-lg p-3" id="display">
-                      <div class="container1" style="position: relative;">
-                        <img id="selected-image" alt="Name" class="img-fluid" style="height: 250px; transition: none;" 
-                        src="{% static 'assets/img/illustrations/nodata.png' %}">
-                      </div>
-                    </div>
+                <div id="inputContainer" style="margin-top: 10px;"></div>
+                <button id="drawLineButton" style="margin-top: 10px;">Crear Línea</button>
+                <button onclick="clearCanvas()">Limpiar Canvas</button>
+                <div class="col-6">
+                  
+                  <div class="card-body bg-white shadow border-radius-lg p-3" style="display: flex; justify-content: center; align-items: center; height: 400px;">
+                    <!-- Canvas con borde -->
+                    <canvas id="drawingCanvas" width="430" height="400" style="border: 2px solid black; "></canvas>
                   </div>
                 </div>
+                
+
+
+                <!-- <div class="col-md-6">
+                        <div class="card card-profile card-plain">
+                            <div class="card-body text-center bg-white shadow border-radius-lg p-3" id="display">
+                                <canvas id="drawingCanvas" width="350" height="400" style="border: 2px solid black; margin-bottom: 50px;"></canvas> -->
+                <!-- Ocultamos la imagen, y la hacemos más pequeña que el canvas 
+                                <img id="selected-image" alt="Name" class="img-fluid" 
+                                     style="max-width: 90%; max-height: 150px; width: auto; height: auto; display: none;" 
+                                     src="{% static 'assets/img/illustrations/nodata.png' %}">
+                            </div>
+                        </div>
+                    </div> -->
+
                 <div class="col-md-6">
                   <div class="card card-profile card-plain">
                     <div class="card-body text-center bg-white shadow border-radius-lg p-3" id="display85">
                       <div class="row">
                         <!-- Primera Columna -->
+
                         <div class="col-6">
                           <a href="javascript:;">
                             <img id="selected85-image" alt="Default Image" class="img-fluid"
-                              style="height: 250px; transition: none;" src="{% static 'assets/img/illustrations/nodata.png' %}">
+                              style="height: 250px; transition: none;"
+                              src="{% static 'assets/img/illustrations/nodata.png' %}">
                           </a>
                         </div>
                         <!-- Segunda Columna -->
                         <div class="col-6">
                           <a href="javascript:;">
                             <img id="selected85-image" alt="Default Image" class="img-fluid"
-                              style="height: 250px; transition: none;" src="{% static 'assets/img/illustrations/nodata.png' %}">
+                              style="height: 250px; transition: none;"
+                              src="{% static 'assets/img/illustrations/nodata.png' %}">
                           </a>
                         </div>
+
                       </div>
                     </div>
                   </div>
                 </div>
-                
+              </div>
 
+
+            </div>
+            <div class="card-body pt-0">
+              <div class="row">
+                <div class="col-md-6 ">
+                  <label class="mt-4">Description</label>
+                  <p class="form-text text-muted text-xs ms-1 d-inline">
+                    (optional)
+                  </p>
+                  <div id="edit-deschiption-edit" class="h-50">
+
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label class="mt-4">Category</label>
+                  <select class="form-control" name="choices-category" id="choices-category-edit">
+                    <option value="Choice 1" selected="">Furniture</option>
+                    <option value="Choice 2">Real Estate</option>
+                    <option value="Choice 3">Electronics</option>
+                    <option value="Choice 4">Clothing</option>
+                    <option value="Choice 5">Others</option>
+                  </select>
+                  <label>Color</label>
+                  <select class="form-control" name="choices-color" id="choices-color-edit">
+                    <option value="Choice 1" selected="">Black</option>
+                    <option value="Choice 2">White</option>
+                    <option value="Choice 3">Blue</option>
+                    <option value="Choice 4">Orange</option>
+                    <option value="Choice 5">Green</option>
+                  </select>
+                </div>
               </div>
-              <div class="card-body pt-0">
-                <div class="row">
-                  <div class="col-md-6 ">
-                    <label class="mt-4">Description</label>
-                    <p class="form-text text-muted text-xs ms-1 d-inline">
-                      (optional)
+            </div>
+          </div>
+          <!-- Card Change Password -->
+          <div class="card mt-4" id="2fa">
+            <div class="card-header d-flex">
+              <h5 class="mb-0">Two-factor authentication</h5>
+              <span class="badge badge-success ms-auto">Enabled</span>
+            </div>
+            <div class="card-body">
+              <div class="d-flex">
+                <p class="my-auto">Security keys</p>
+                <p class="text-secondary text-sm ms-auto my-auto me-3">No Security Keys</p>
+                <button class="btn btn-sm btn-outline-dark mb-0" type="button">Add</button>
+              </div>
+              <hr class="horizontal dark">
+              <div class="d-flex">
+                <p class="my-auto">SMS number</p>
+                <p class="text-secondary text-sm ms-auto my-auto me-3">+4012374423</p>
+                <button class="btn btn-sm btn-outline-dark mb-0" type="button">Edit</button>
+              </div>
+              <hr class="horizontal dark">
+              <div class="d-flex">
+                <p class="my-auto">Authenticator app</p>
+                <p class="text-secondary text-sm ms-auto my-auto me-3">Not Configured</p>
+                <button class="btn btn-sm btn-outline-dark mb-0" type="button">Set up</button>
+              </div>
+            </div>
+          </div>
+          <!-- Card Accounts -->
+          <div class="card mt-4" id="accounts">
+            <div class="card-header">
+              <h5>Accounts</h5>
+              <p class="text-sm">Here you can setup and manage your integration settings.</p>
+            </div>
+            <div class="card-body pt-0">
+              <div class="d-flex">
+                <img class="width-48-px" src="{% static 'assets/img/small-logos/logo-slack.svg' %}" alt="logo_slack">
+                <div class="my-auto ms-3">
+                  <div class="h-100">
+                    <h5 class="mb-0">Slack</h5>
+                    <a class="text-sm text-body" href="javascript:;">Show less <i class="fas fa-chevron-up text-xs ms-1"
+                        aria-hidden="true"></i></a>
+                  </div>
+                </div>
+                <p class="text-sm text-secondary ms-auto me-3 my-auto">Enabled</p>
+                <div class="form-check form-switch my-auto">
+                  <input class="form-check-input" checked type="checkbox" id="flexSwitchCheckDefault1">
+                </div>
+              </div>
+              <div class="ps-5 pt-3 ms-3">
+                <p class="mb-0 text-sm">You haven't added your Slack yet or you aren't authorized. Please add our
+                  Slack Bot to your account by clicking on <a href="javascript">here</a>. When you've added the bot,
+                  send your verification code that you have received.</p>
+                <div class="d-sm-flex bg-gray-100 border-radius-lg p-2 my-4">
+                  <p class="text-sm font-weight-bold my-auto ps-sm-2">Verification Code</p>
+                  <input class="form-control form-control-sm ms-sm-auto mt-sm-0 mt-2 w-sm-15 w-40" type="text"
+                    value="1172913" data-bs-toggle="tooltip" data-bs-placement="top" title="Copy!">
+                </div>
+                <div class="d-sm-flex bg-gray-100 border-radius-lg p-2 my-4">
+                  <p class="text-sm font-weight-bold my-auto ps-sm-2">Connected account</p>
+                  <h6 class="text-sm ms-auto me-3 my-auto">hello@creative-tim.com</h6>
+                  <button class="btn btn-sm bg-gradient-danger my-sm-auto mt-2 mb-0" type="button"
+                    name="button">Delete</button>
+                </div>
+              </div>
+              <hr class="horizontal dark">
+              <div class="d-flex">
+                <img class="width-48-px" src="{% static 'assets/img/small-logos/logo-spotify.svg' %}"
+                  alt="logo_spotify">
+                <div class="my-auto ms-3">
+                  <div class="h-100">
+                    <h5 class="mb-0">Spotify</h5>
+                    <p class="mb-0 text-sm">Music</p>
+                  </div>
+                </div>
+                <p class="text-sm text-secondary ms-auto me-3 my-auto">Enabled</p>
+                <div class="form-check form-switch my-auto">
+                  <input class="form-check-input" checked type="checkbox" id="flexSwitchCheckDefault2">
+                </div>
+              </div>
+              <hr class="horizontal dark">
+              <div class="d-flex">
+                <img class="width-48-px" src="{% static 'assets/img/small-logos/logo-atlassian.svg' %}"
+                  alt="logo_atlassian">
+                <div class="my-auto ms-3">
+                  <div class="h-100">
+                    <h5 class="mb-0">Atlassian</h5>
+                    <p class="mb-0 text-sm">Payment vendor</p>
+                  </div>
+                </div>
+                <p class="text-sm text-secondary ms-auto me-3 my-auto">Enabled</p>
+                <div class="form-check form-switch my-auto">
+                  <input class="form-check-input" checked type="checkbox" id="flexSwitchCheckDefault3">
+                </div>
+              </div>
+              <hr class="horizontal dark">
+              <div class="d-flex">
+                <img class="width-48-px" src="{% static 'assets/img/small-logos/logo-asana.svg' %}" alt="logo_asana">
+                <div class="my-auto ms-3">
+                  <div class="h-100">
+                    <h5 class="mb-0">Asana</h5>
+                    <p class="mb-0 text-sm">Organize your team</p>
+                  </div>
+                </div>
+                <div class="form-check form-switch ms-auto my-auto">
+                  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault4">
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Card Notifications -->
+          <div class="card mt-4" id="notifications">
+            <div class="card-header">
+              <h5>Notifications</h5>
+              <p class="text-sm">Choose how you receive notifications. These notification settings apply to the things
+                you’re watching.</p>
+            </div>
+            <div class="card-body pt-0">
+              <div class="table-responsive">
+                <table class="table mb-0">
+                  <thead>
+                    <tr>
+                      <th class="ps-1" colspan="4">
+                        <p class="mb-0">Activity</p>
+                      </th>
+                      <th class="text-center">
+                        <p class="mb-0">Email</p>
+                      </th>
+                      <th class="text-center">
+                        <p class="mb-0">Push</p>
+                      </th>
+                      <th class="text-center">
+                        <p class="mb-0">SMS</p>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="ps-1" colspan="4">
+                        <div class="my-auto">
+                          <span class="text-dark d-block text-sm">Mentions</span>
+                          <span class="text-xs font-weight-normal">Notify when another user mentions you in a
+                            comment</span>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
+                          <input class="form-check-input" checked type="checkbox" id="flexSwitchCheckDefault11">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
+                          <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault12">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
+                          <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault13">
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="ps-1" colspan="4">
+                        <div class="my-auto">
+                          <span class="text-dark d-block text-sm">Comments</span>
+                          <span class="text-xs font-weight-normal">Notify when another user comments your item.</span>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
+                          <input class="form-check-input" checked type="checkbox" id="flexSwitchCheckDefault14">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
+                          <input class="form-check-input" checked type="checkbox" id="flexSwitchCheckDefault15">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
+                          <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault16">
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="ps-1" colspan="4">
+                        <div class="my-auto">
+                          <span class="text-dark d-block text-sm">Follows</span>
+                          <span class="text-xs font-weight-normal">Notify when another user follows you.</span>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
+                          <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault17">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
+                          <input class="form-check-input" checked type="checkbox" id="flexSwitchCheckDefault18">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
+                          <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault19">
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="ps-1" colspan="4">
+                        <div class="my-auto">
+                          <p class="text-sm mb-0">Log in from a new device</p>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
+                          <input class="form-check-input" checked type="checkbox" id="flexSwitchCheckDefault20">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
+                          <input class="form-check-input" checked type="checkbox" id="flexSwitchCheckDefault21">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
+                          <input class="form-check-input" checked type="checkbox" id="flexSwitchCheckDefault22">
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <!-- Card Sessions -->
+          <div class="card mt-4" id="sessions">
+            <div class="card-header pb-3">
+              <h5>Sessions</h5>
+              <p class="text-sm">This is a list of devices that have logged into your account. Remove those that you
+                do not recognize.</p>
+            </div>
+            <div class="card-body pt-0">
+              <div class="d-flex align-items-center">
+                <div class="text-center w-5">
+                  <i class="fas fa-desktop text-lg opacity-6"></i>
+                </div>
+                <div class="my-auto ms-3">
+                  <div class="h-100">
+                    <p class="text-sm mb-1">
+                      Bucharest 68.133.163.201
                     </p>
-                    <div id="edit-deschiption-edit" class="h-50">
-                     
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <label class="mt-4">Category</label>
-                    <select class="form-control" name="choices-category" id="choices-category-edit">
-                      <option value="Choice 1" selected="">Furniture</option>
-                      <option value="Choice 2">Real Estate</option>
-                      <option value="Choice 3">Electronics</option>
-                      <option value="Choice 4">Clothing</option>
-                      <option value="Choice 5">Others</option>
-                    </select>
-                    <label>Color</label>
-                    <select class="form-control" name="choices-color" id="choices-color-edit">
-                      <option value="Choice 1" selected="">Black</option>
-                      <option value="Choice 2">White</option>
-                      <option value="Choice 3">Blue</option>
-                      <option value="Choice 4">Orange</option>
-                      <option value="Choice 5">Green</option>
-                    </select>
+                    <p class="mb-0 text-xs">
+                      Your current session
+                    </p>
                   </div>
                 </div>
+                <span class="badge badge-success badge-sm my-auto ms-auto me-3">Active</span>
+                <p class="text-secondary text-sm my-auto me-3">EU</p>
+                <a href="javascript:;" class="text-primary text-sm icon-move-right my-auto">See more
+                  <i class="fas fa-arrow-right text-xs ms-1" aria-hidden="true"></i>
+                </a>
+              </div>
+              <hr class="horizontal dark">
+              <div class="d-flex align-items-center">
+                <div class="text-center w-5">
+                  <i class="fas fa-desktop text-lg opacity-6"></i>
+                </div>
+                <p class="my-auto ms-3">Chrome on macOS</p>
+                <p class="text-secondary text-sm ms-auto my-auto me-3">US</p>
+                <a href="javascript:;" class="text-primary text-sm icon-move-right my-auto">See more
+                  <i class="fas fa-arrow-right text-xs ms-1" aria-hidden="true"></i>
+                </a>
+              </div>
+              <hr class="horizontal dark">
+              <div class="d-flex align-items-center">
+                <div class="text-center w-5">
+                  <i class="fas fa-mobile text-lg opacity-6"></i>
+                </div>
+                <p class="my-auto ms-3">Safari on iPhone</p>
+                <p class="text-secondary text-sm ms-auto my-auto me-3">US</p>
+                <a href="javascript:;" class="text-primary text-sm icon-move-right my-auto">See more
+                  <i class="fas fa-arrow-right text-xs ms-1" aria-hidden="true"></i>
+                </a>
               </div>
             </div>
-            <!-- Card Change Password -->
-            <div class="card mt-4" id="2fa">
-              <div class="card-header d-flex">
-                <h5 class="mb-0">Two-factor authentication</h5>
-                <span class="badge badge-success ms-auto">Enabled</span>
-              </div>
-              <div class="card-body">
-                <div class="d-flex">
-                  <p class="my-auto">Security keys</p>
-                  <p class="text-secondary text-sm ms-auto my-auto me-3">No Security Keys</p>
-                  <button class="btn btn-sm btn-outline-dark mb-0" type="button">Add</button>
-                </div>
-                <hr class="horizontal dark">
-                <div class="d-flex">
-                  <p class="my-auto">SMS number</p>
-                  <p class="text-secondary text-sm ms-auto my-auto me-3">+4012374423</p>
-                  <button class="btn btn-sm btn-outline-dark mb-0" type="button">Edit</button>
-                </div>
-                <hr class="horizontal dark">
-                <div class="d-flex">
-                  <p class="my-auto">Authenticator app</p>
-                  <p class="text-secondary text-sm ms-auto my-auto me-3">Not Configured</p>
-                  <button class="btn btn-sm btn-outline-dark mb-0" type="button">Set up</button>
-                </div>
-              </div>
+          </div>
+          <!-- Card Delete Account -->
+          <div class="card mt-4" id="delete">
+            <div class="card-header">
+              <h5>Delete Account</h5>
+              <p class="text-sm mb-0">Once you delete your account, there is no going back. Please be certain.</p>
             </div>
-            <!-- Card Accounts -->
-            <div class="card mt-4" id="accounts">
-              <div class="card-header">
-                <h5>Accounts</h5>
-                <p class="text-sm">Here you can setup and manage your integration settings.</p>
-              </div>
-              <div class="card-body pt-0">
-                <div class="d-flex">
-                  <img class="width-48-px" src="{% static 'assets/img/small-logos/logo-slack.svg' %}" alt="logo_slack">
-                  <div class="my-auto ms-3">
-                    <div class="h-100">
-                      <h5 class="mb-0">Slack</h5>
-                      <a class="text-sm text-body" href="javascript:;">Show less <i
-                          class="fas fa-chevron-up text-xs ms-1" aria-hidden="true"></i></a>
-                    </div>
-                  </div>
-                  <p class="text-sm text-secondary ms-auto me-3 my-auto">Enabled</p>
-                  <div class="form-check form-switch my-auto">
-                    <input class="form-check-input" checked type="checkbox" id="flexSwitchCheckDefault1">
+            <div class="card-body d-sm-flex pt-0">
+              <div class="d-flex align-items-center mb-sm-0 mb-4">
+                <div>
+                  <div class="form-check form-switch mb-0">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault0">
                   </div>
                 </div>
-                <div class="ps-5 pt-3 ms-3">
-                  <p class="mb-0 text-sm">You haven't added your Slack yet or you aren't authorized. Please add our
-                    Slack Bot to your account by clicking on <a href="javascript">here</a>. When you've added the bot,
-                    send your verification code that you have received.</p>
-                  <div class="d-sm-flex bg-gray-100 border-radius-lg p-2 my-4">
-                    <p class="text-sm font-weight-bold my-auto ps-sm-2">Verification Code</p>
-                    <input class="form-control form-control-sm ms-sm-auto mt-sm-0 mt-2 w-sm-15 w-40" type="text"
-                      value="1172913" data-bs-toggle="tooltip" data-bs-placement="top" title="Copy!">
-                  </div>
-                  <div class="d-sm-flex bg-gray-100 border-radius-lg p-2 my-4">
-                    <p class="text-sm font-weight-bold my-auto ps-sm-2">Connected account</p>
-                    <h6 class="text-sm ms-auto me-3 my-auto">hello@creative-tim.com</h6>
-                    <button class="btn btn-sm bg-gradient-danger my-sm-auto mt-2 mb-0" type="button"
-                      name="button">Delete</button>
-                  </div>
-                </div>
-                <hr class="horizontal dark">
-                <div class="d-flex">
-                  <img class="width-48-px" src="{% static 'assets/img/small-logos/logo-spotify.svg' %}"
-                    alt="logo_spotify">
-                  <div class="my-auto ms-3">
-                    <div class="h-100">
-                      <h5 class="mb-0">Spotify</h5>
-                      <p class="mb-0 text-sm">Music</p>
-                    </div>
-                  </div>
-                  <p class="text-sm text-secondary ms-auto me-3 my-auto">Enabled</p>
-                  <div class="form-check form-switch my-auto">
-                    <input class="form-check-input" checked type="checkbox" id="flexSwitchCheckDefault2">
-                  </div>
-                </div>
-                <hr class="horizontal dark">
-                <div class="d-flex">
-                  <img class="width-48-px" src="{% static 'assets/img/small-logos/logo-atlassian.svg' %}"
-                    alt="logo_atlassian">
-                  <div class="my-auto ms-3">
-                    <div class="h-100">
-                      <h5 class="mb-0">Atlassian</h5>
-                      <p class="mb-0 text-sm">Payment vendor</p>
-                    </div>
-                  </div>
-                  <p class="text-sm text-secondary ms-auto me-3 my-auto">Enabled</p>
-                  <div class="form-check form-switch my-auto">
-                    <input class="form-check-input" checked type="checkbox" id="flexSwitchCheckDefault3">
-                  </div>
-                </div>
-                <hr class="horizontal dark">
-                <div class="d-flex">
-                  <img class="width-48-px" src="{% static 'assets/img/small-logos/logo-asana.svg' %}" alt="logo_asana">
-                  <div class="my-auto ms-3">
-                    <div class="h-100">
-                      <h5 class="mb-0">Asana</h5>
-                      <p class="mb-0 text-sm">Organize your team</p>
-                    </div>
-                  </div>
-                  <div class="form-check form-switch ms-auto my-auto">
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault4">
-                  </div>
+                <div class="ms-2">
+                  <span class="text-dark font-weight-bold d-block text-sm">Confirm</span>
+                  <span class="text-xs d-block">I want to delete my account.</span>
                 </div>
               </div>
-            </div>
-            <!-- Card Notifications -->
-            <div class="card mt-4" id="notifications">
-              <div class="card-header">
-                <h5>Notifications</h5>
-                <p class="text-sm">Choose how you receive notifications. These notification settings apply to the things
-                  you’re watching.</p>
-              </div>
-              <div class="card-body pt-0">
-                <div class="table-responsive">
-                  <table class="table mb-0">
-                    <thead>
-                      <tr>
-                        <th class="ps-1" colspan="4">
-                          <p class="mb-0">Activity</p>
-                        </th>
-                        <th class="text-center">
-                          <p class="mb-0">Email</p>
-                        </th>
-                        <th class="text-center">
-                          <p class="mb-0">Push</p>
-                        </th>
-                        <th class="text-center">
-                          <p class="mb-0">SMS</p>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td class="ps-1" colspan="4">
-                          <div class="my-auto">
-                            <span class="text-dark d-block text-sm">Mentions</span>
-                            <span class="text-xs font-weight-normal">Notify when another user mentions you in a
-                              comment</span>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
-                            <input class="form-check-input" checked type="checkbox" id="flexSwitchCheckDefault11">
-                          </div>
-                        </td>
-                        <td>
-                          <div class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault12">
-                          </div>
-                        </td>
-                        <td>
-                          <div class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault13">
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="ps-1" colspan="4">
-                          <div class="my-auto">
-                            <span class="text-dark d-block text-sm">Comments</span>
-                            <span class="text-xs font-weight-normal">Notify when another user comments your item.</span>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
-                            <input class="form-check-input" checked type="checkbox" id="flexSwitchCheckDefault14">
-                          </div>
-                        </td>
-                        <td>
-                          <div class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
-                            <input class="form-check-input" checked type="checkbox" id="flexSwitchCheckDefault15">
-                          </div>
-                        </td>
-                        <td>
-                          <div class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault16">
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="ps-1" colspan="4">
-                          <div class="my-auto">
-                            <span class="text-dark d-block text-sm">Follows</span>
-                            <span class="text-xs font-weight-normal">Notify when another user follows you.</span>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault17">
-                          </div>
-                        </td>
-                        <td>
-                          <div class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
-                            <input class="form-check-input" checked type="checkbox" id="flexSwitchCheckDefault18">
-                          </div>
-                        </td>
-                        <td>
-                          <div class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault19">
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="ps-1" colspan="4">
-                          <div class="my-auto">
-                            <p class="text-sm mb-0">Log in from a new device</p>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
-                            <input class="form-check-input" checked type="checkbox" id="flexSwitchCheckDefault20">
-                          </div>
-                        </td>
-                        <td>
-                          <div class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
-                            <input class="form-check-input" checked type="checkbox" id="flexSwitchCheckDefault21">
-                          </div>
-                        </td>
-                        <td>
-                          <div class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
-                            <input class="form-check-input" checked type="checkbox" id="flexSwitchCheckDefault22">
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <!-- Card Sessions -->
-            <div class="card mt-4" id="sessions">
-              <div class="card-header pb-3">
-                <h5>Sessions</h5>
-                <p class="text-sm">This is a list of devices that have logged into your account. Remove those that you
-                  do not recognize.</p>
-              </div>
-              <div class="card-body pt-0">
-                <div class="d-flex align-items-center">
-                  <div class="text-center w-5">
-                    <i class="fas fa-desktop text-lg opacity-6"></i>
-                  </div>
-                  <div class="my-auto ms-3">
-                    <div class="h-100">
-                      <p class="text-sm mb-1">
-                        Bucharest 68.133.163.201
-                      </p>
-                      <p class="mb-0 text-xs">
-                        Your current session
-                      </p>
-                    </div>
-                  </div>
-                  <span class="badge badge-success badge-sm my-auto ms-auto me-3">Active</span>
-                  <p class="text-secondary text-sm my-auto me-3">EU</p>
-                  <a href="javascript:;" class="text-primary text-sm icon-move-right my-auto">See more
-                    <i class="fas fa-arrow-right text-xs ms-1" aria-hidden="true"></i>
-                  </a>
-                </div>
-                <hr class="horizontal dark">
-                <div class="d-flex align-items-center">
-                  <div class="text-center w-5">
-                    <i class="fas fa-desktop text-lg opacity-6"></i>
-                  </div>
-                  <p class="my-auto ms-3">Chrome on macOS</p>
-                  <p class="text-secondary text-sm ms-auto my-auto me-3">US</p>
-                  <a href="javascript:;" class="text-primary text-sm icon-move-right my-auto">See more
-                    <i class="fas fa-arrow-right text-xs ms-1" aria-hidden="true"></i>
-                  </a>
-                </div>
-                <hr class="horizontal dark">
-                <div class="d-flex align-items-center">
-                  <div class="text-center w-5">
-                    <i class="fas fa-mobile text-lg opacity-6"></i>
-                  </div>
-                  <p class="my-auto ms-3">Safari on iPhone</p>
-                  <p class="text-secondary text-sm ms-auto my-auto me-3">US</p>
-                  <a href="javascript:;" class="text-primary text-sm icon-move-right my-auto">See more
-                    <i class="fas fa-arrow-right text-xs ms-1" aria-hidden="true"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <!-- Card Delete Account -->
-            <div class="card mt-4" id="delete">
-              <div class="card-header">
-                <h5>Delete Account</h5>
-                <p class="text-sm mb-0">Once you delete your account, there is no going back. Please be certain.</p>
-              </div>
-              <div class="card-body d-sm-flex pt-0">
-                <div class="d-flex align-items-center mb-sm-0 mb-4">
-                  <div>
-                    <div class="form-check form-switch mb-0">
-                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault0">
-                    </div>
-                  </div>
-                  <div class="ms-2">
-                    <span class="text-dark font-weight-bold d-block text-sm">Confirm</span>
-                    <span class="text-xs d-block">I want to delete my account.</span>
-                  </div>
-                </div>
-                <button class="btn btn-outline-secondary mb-0 ms-auto" type="button" name="button">Deactivate</button>
-                <button class="btn bg-gradient-danger mb-0 ms-2" type="button" name="button">Delete Account</button>
-              </div>
+              <button class="btn btn-outline-secondary mb-0 ms-auto" type="button" name="button">Deactivate</button>
+              <button class="btn bg-gradient-danger mb-0 ms-2" type="button" name="button">Delete Account</button>
             </div>
           </div>
         </div>
       </div>
-      <!-- FIN DE  -->
     </div>
+    <!-- FIN DE  -->
   </div>
+</div>
 </div>
 <script src="{% static 'assets/js/plugins/quill.min.js' %}"></script>
 <script>
@@ -1604,7 +1726,7 @@
 </script>
 <script>
   // Para las imágenes con clase selectable4 (contenedor display)
-  const images = document.querySelectorAll('.selectable4 img');
+  const images = document.querySelectorAll('.selectable img');
   const displayImage = document.getElementById('selected-image'); // Contenedor de visualización 1
 
   images.forEach(image => {
@@ -1877,24 +1999,34 @@
   }
 
 </script>
-<script>
+<!-- <script>
   const container = document.querySelector('.container1');
 
-  // Crear 10 líneas (5 horizontales y 5 verticales)
+  // Crear líneas iniciales
   for (let i = 0; i < 2; i++) {
     // Línea horizontal
     const hLine = document.createElement('div');
     hLine.classList.add('line', 'horizontal');
-    hLine.style.top = `${20 + i * 40}px`; // Posición inicial
-    hLine.style.left = '0'; // Inicia en la izquierda
+    hLine.style.top = `${20 + i * 40}px`;
+    hLine.style.left = '0';
     container.appendChild(hLine);
 
     // Línea vertical
     const vLine = document.createElement('div');
     vLine.classList.add('line', 'vertical');
-    vLine.style.left = `${20 + i * 40}px`; // Posición inicial
-    vLine.style.top = '0'; // Inicia arriba
+    vLine.style.left = `${20 + i * 40}px`;
+    vLine.style.top = '0';
     container.appendChild(vLine);
+  }
+
+  // Crear líneas diagonales
+  for (let i = 0; i < 2; i++) {
+    const dLine = document.createElement('div');
+    dLine.classList.add('line', 'diagonal');
+    dLine.style.top = `${50 + i * 100}px`;
+    dLine.style.left = `${50 + i * 100}px`;
+    dLine.style.transform = `rotate(${45 + i * 90}deg)`;
+    container.appendChild(dLine);
   }
 
   // CSS dinámico
@@ -1908,13 +2040,20 @@
     }
 
     .line.horizontal {
-      width: 100px; /* Ancho inicial */
+      width: 100px;
       height: 2px;
     }
 
     .line.vertical {
       width: 2px;
-      height: 100px; /* Altura inicial */
+      height: 100px;
+    }
+
+    .line.diagonal {
+      width: 2px;
+      height: 100px;
+      transform-origin: top left;
+      background-color: green;
     }
 
     .line .resize-handle {
@@ -1935,6 +2074,11 @@
       right: -5px;
     }
 
+    .line.diagonal .resize-handle {
+      bottom: -5px;
+      right: -5px;
+    }
+
     .line input {
       position: absolute;
       background-color: white;
@@ -1947,15 +2091,21 @@
     }
 
     .line.horizontal input {
-      left: 50%; /* Centrar en el medio */
+      left: 50%;
       transform: translateX(-50%);
       top: -15px;
     }
 
     .line.vertical input {
-      top: 50%; /* Centrar en el medio */
+      top: 50%;
       transform: translateY(-50%);
       left: -25px;
+    }
+
+    .line.diagonal input {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   `;
   document.head.appendChild(style);
@@ -1964,6 +2114,7 @@
   let selectedLine = null;
   let resizing = false;
   let offsetX = 0, offsetY = 0;
+  let initialX = 0, initialY = 0;
 
   const lines = document.querySelectorAll('.line');
   lines.forEach(line => {
@@ -1972,18 +2123,14 @@
     resizeHandle.classList.add('resize-handle');
     line.appendChild(resizeHandle);
 
-    // Crear input para ingresar valores
-    const input = document.createElement('input');
-    input.type = 'number';
-    input.value = '0'; // Valor predeterminado
-    line.appendChild(input);
-
     // Evento para iniciar el arrastre
     line.addEventListener('mousedown', (e) => {
-      if (e.target === resizeHandle || e.target === input) return; // Ignorar clics en manejador o input
+      if (e.target === resizeHandle) return;
       selectedLine = line;
       offsetX = e.offsetX;
       offsetY = e.offsetY;
+      initialX = e.clientX;
+      initialY = e.clientY;
       line.classList.add('dragging');
     });
 
@@ -1991,7 +2138,9 @@
     resizeHandle.addEventListener('mousedown', (e) => {
       resizing = true;
       selectedLine = line;
-      e.stopPropagation(); // Evitar conflictos con el arrastre
+      initialX = e.clientX;
+      initialY = e.clientY;
+      e.stopPropagation();
     });
   });
 
@@ -2002,26 +2151,23 @@
     const containerRect = container.getBoundingClientRect();
 
     if (resizing) {
-      // Redimensionar la línea
-      if (selectedLine.classList.contains('horizontal')) {
-        const newWidth = Math.max(10, Math.min(e.clientX - containerRect.left - selectedLine.offsetLeft, containerRect.width));
-        selectedLine.style.width = `${newWidth}px`;
-      } else if (selectedLine.classList.contains('vertical')) {
-        const newHeight = Math.max(10, Math.min(e.clientY - containerRect.top - selectedLine.offsetTop, containerRect.height));
-        selectedLine.style.height = `${newHeight}px`;
+      if (selectedLine.classList.contains('diagonal')) {
+        const deltaX = e.clientX - initialX;
+        const deltaY = e.clientY - initialY;
+        const angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
+        const distance = Math.sqrt(deltaX ** 2 + deltaY ** 2);
+        selectedLine.style.transform = `rotate(${angle}deg)`;
+        selectedLine.style.height = `${distance}px`;
       }
     } else {
-      // Mover la línea libremente
       const x = e.clientX - containerRect.left - offsetX;
       const y = e.clientY - containerRect.top - offsetY;
 
-      // Actualizar la posición
       selectedLine.style.left = `${Math.max(0, Math.min(x, containerRect.width - selectedLine.offsetWidth))}px`;
       selectedLine.style.top = `${Math.max(0, Math.min(y, containerRect.height - selectedLine.offsetHeight))}px`;
     }
   });
 
-  // Evento para finalizar el arrastre o redimensionamiento
   document.addEventListener('mouseup', () => {
     if (selectedLine) {
       selectedLine.classList.remove('dragging');
@@ -2029,5 +2175,124 @@
       resizing = false;
     }
   });
+</script> -->
+<script>
+  const canvas = document.getElementById('drawingCanvas');
+  const ctx = canvas.getContext('2d');
+  const inputContainer = document.getElementById('inputContainer');
+  const drawLineButton = document.getElementById('drawLineButton');
+
+  // Variables para almacenar puntos y estado
+  let points = [];
+  let isDrawing = false;
+
+  // Evento para capturar clics en el canvas
+  canvas.addEventListener('click', (event) => {
+    if (!isDrawing) return; // Solo registrar clics si se está creando una línea
+
+    // Obtener la posición del clic relativo al canvas
+    const rect = canvas.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    // Guardar el punto clicado
+    points.push({ x, y });
+
+    // Dibujar si hay al menos dos puntos
+    if (points.length > 1) {
+      drawLine(points[points.length - 2], points[points.length - 1]);
+
+      // Mostrar input para medidas en la primera línea
+      if (points.length === 2) {
+        showMeasurementInput(points[0], points[1]);
+      }
+    }
+  });
+
+  // Función para dibujar una línea entre dos puntos
+  function drawLine(start, end) {
+    ctx.beginPath();
+    ctx.moveTo(start.x, start.y);
+    ctx.lineTo(end.x, end.y);
+    ctx.strokeStyle = 'red'; // Color de la línea
+    ctx.lineWidth = 2; // Grosor de la línea
+    ctx.stroke();
+    ctx.closePath();
+  }
+
+  // Función para mostrar input de medida en el medio de la línea
+  function showMeasurementInput(start, end) {
+    // Calcular distancia entre los puntos
+    const distance = Math.sqrt(Math.pow(end.x - start.x, 2) + Math.pow(end.y - start.y, 2)).toFixed(2);
+
+    // Calcular posición media
+    const midX = (start.x + end.x) / 2;
+    const midY = (start.y + end.y) / 2;
+
+    // Dibujar la medida en el canvas
+    ctx.font = '15px Arial';
+    ctx.fillStyle = 'blue';
+    ctx.fillText(`${distance} cm`, midX + 5, midY - 5);
+
+    // Crear el input y colocarlo en el canvas
+    
+
+    // Limpiar el contenedor y agregar el input
+    inputContainer.innerHTML = '';
+    inputContainer.appendChild(input);
+  }
+
+  // Evento para habilitar el modo de dibujo al hacer clic en el botón
+  drawLineButton.addEventListener('click', () => {
+    isDrawing = true; // Activar el modo de dibujo
+    points = []; // Reiniciar los puntos para una nueva línea
+  });
+
+</script>
+<script>
+  // Variable global para guardar la imagen
+  var img = document.getElementById('selected-image');
+
+  function clearCanvas() {
+    // Limpiar solo las líneas del canvas, no la imagen
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Redibujar la imagen sin borrarla
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height); // Redibuja la imagen en el canvas
+
+    // Reiniciar los puntos (solo si es necesario para el dibujo)
+    points = [];
+
+    // Limpiar el contenedor de inputs
+    inputContainer.innerHTML = '';
+
+    // Desactivar el modo de dibujo
+    isDrawing = false;
+  }
+  // window.onload = function() {
+  //     var canvas = document.getElementById('drawingCanvas');
+  //     var ctx = canvas.getContext('2d');
+
+  //     // Crear una nueva imagen y cargarla
+  //     var img = document.getElementById('selected-image');
+
+  //     // Cuando la imagen esté cargada, dibujarla en el canvas
+  //     img.onload = function() {
+  //       ctx.drawImage(img, 0, 0, canvas.width, canvas.height); // Dibuja la imagen en el canvas
+  //     };
+  //   };
+  window.onload = function () {
+    var canvas = document.getElementById('drawingCanvas');
+    var ctx = canvas.getContext('2d'); // Obtiene el contexto 2D del canvas
+
+    var img = new Image(); // Crea una nueva instancia de imagen
+    img.src = '{% static "assets/img/1.png" %}'; // Ruta de la imagen que deseas dibujar
+
+    img.onload = function () {
+      // Al cargar la imagen, dibuja la imagen en el canvas
+      ctx.drawImage(img, 105, 50, 200, 300); // Dibuja la imagen en el canvas, ajustando su tamaño
+    };
+  };
+
 </script>
 {% endblock content %}

@@ -482,7 +482,7 @@
             </figure>
             <figure class="col-12 col-md-2 p-0 mb-0 rotate-3d selectable">
               <img src="{% static 'assets/img/6.png' %}" alt="Necromancer" class="img-fluid">
-              
+
             </figure>
           </div>
           <br>
@@ -1184,19 +1184,16 @@
             <!-- Card IMAGES -->
             <div class="card mt-4" id="password">
               <div class="row">
-                <div style="display: flex; gap: 20px; align-items: center; margin-top: 20px; margin-left: 30px;margin-bottom: 10px;">
+                <div
+                  style="display: flex; gap: 20px; align-items: center; margin-top: 20px; margin-left: 30px;margin-bottom: 10px;">
                   <!-- Ícono para agregar líneas -->
-                  <i class="fas fa-pencil-alt custom-color" 
-                     id="drawLineIcon" 
-                     style="font-size: 24px; cursor: pointer;" 
-                     title="Agregar líneas"></i>
-                     
+                  <i class="fas fa-pencil-alt custom-color" id="drawLineIcon" style="font-size: 24px; cursor: pointer;"
+                    title="Agregar líneas"></i>
+
                   <!-- Ícono para borrar todo -->
-                  <i class="fas fa-trash custom-color" 
-                     id="clearCanvasIcon" 
-                     style="font-size: 24px; cursor: pointer;" 
-                     title="Limpiar Lineas"></i>
-              </div>
+                  <i class="fas fa-trash custom-color" id="clearCanvasIcon" style="font-size: 24px; cursor: pointer;"
+                    title="Limpiar Lineas"></i>
+                </div>
                 <div class="col-6">
 
                   <div class="card-body bg-white shadow border-radius-lg p-3"
@@ -1234,33 +1231,31 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="card-body"
-                  <label >Description</label>
-                  <p class="form-text text-muted text-xs ms-1 d-inline">
-                    (optional)
-                  </p>
-                  <div id="edit-deschiption-edit" class="h-50"></div>
+                  <div class="card-body" <label>Description</label>
+                    <p class="form-text text-muted text-xs ms-1 d-inline">
+                      (optional)
+                    </p>
+                    <div id="edit-deschiption-edit" class="h-50"></div>
+                  </div>
                 </div>
-              </div>
                 <div class="col-6">
-                  <div class="card-body"
-                  <label class="mt-lg-2">Category</label>
-                  <select class="form-control" name="choices-category" id="choices-category-edit">
-                    <option value="Choice 1" selected="">Furniture</option>
-                    <option value="Choice 2">Real Estate</option>
-                    <option value="Choice 3">Electronics</option>
-                    <option value="Choice 4">Clothing</option>
-                    <option value="Choice 5">Others</option>
-                  </select>
-                  <label>Color</label>
-                  <select class="form-control" name="choices-color" id="choices-color-edit">
-                    <option value="Choice 1" selected="">Black</option>
-                    <option value="Choice 2">White</option>
-                    <option value="Choice 3">Blue</option>
-                    <option value="Choice 4">Orange</option>
-                    <option value="Choice 5">Green</option>
-                  </select>
-                </div>
+                  <div class="card-body" <label class="mt-lg-2">Category</label>
+                    <select class="form-control" name="choices-category" id="choices-category-edit">
+                      <option value="Choice 1" selected="">Furniture</option>
+                      <option value="Choice 2">Real Estate</option>
+                      <option value="Choice 3">Electronics</option>
+                      <option value="Choice 4">Clothing</option>
+                      <option value="Choice 5">Others</option>
+                    </select>
+                    <label>Color</label>
+                    <select class="form-control" name="choices-color" id="choices-color-edit">
+                      <option value="Choice 1" selected="">Black</option>
+                      <option value="Choice 2">White</option>
+                      <option value="Choice 3">Blue</option>
+                      <option value="Choice 4">Orange</option>
+                      <option value="Choice 5">Green</option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1268,48 +1263,76 @@
           </div>
         </div>
         <!-- Card Change Price -->
-        <div class="card mb-5" id="2fa">
-         
-          <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Cost Breakdown</h5>
-            <span class="badge badge-success">$1,600.00</span>
+        <div class="card mt-4" id="dd">
+          <div class="row">
+            <!-- Columna de la animación 3D -->
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-header">
+                  <h5>Puerta Giratoria 3D</h5>
+                </div>
+                <div class="card-body pt-0">
+                  <img id="myImage" src="{% static 'assets/img/3.png' %}" style="display:none;">
+                  <canvas id="three-canvas" width="300" height="300" style="display: block; width: 300px; height: 300px; position: relative; left: 30px; top: -32px; transition: none;"></canvas>
+              </div>
+              </div>
+            </div>
+          
+            <!-- Columna del formulario -->
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-header">
+                  <h5>Información del Producto</h5>
+                </div>
+                <div class="card-body pt-0">
+                  <form class="js-sale-calculator-form">
+                    <fieldset>
+                      <div class="mb-2">
+                        <label for="product_cost">Costo del producto</label>
+                        <div class="row mb-4">
+                          <div class="col-6 d-flex align-items-center">
+                            <i class="fa fa-dollar-sign me-2 custom-color"></i>
+                            <input id="product_cost" name="product_cost" class="form-control border" type="text" placeholder="Ejemplo: 100" required>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="mb-2">
+                        <label for="product_operative_expenses">Gastos operacionales por producto</label>
+                        <div class="row mb-4">
+                          <div class="col-6 d-flex align-items-center">
+                            <i class="fa fa-dollar-sign me-2 custom-color"></i>
+                            <input id="product_operative_expenses" name="product_operative_expenses" class="form-control border" type="text" placeholder="Ejemplo: 50" required>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="mb-2">
+                        <label for="product_estimated_profit">Porcentaje de margen de lucro</label>
+                        <div class="row mb-4">
+                          <div class="col-6 d-flex align-items-center">
+                            <i class="fa fa-dollar-sign me-2 custom-color"></i>
+                            <input id="product_estimated_profit" name="product_estimated_profit" class="form-control border" type="text" placeholder="Ejemplo: 20" required>
+                          </div>
+                        </div>
+                      </div>
+                    </fieldset>
+                    <div class="js-result-preview">
+                      <div class="p-4 section-bg-color rounded-3 mt-2 border">
+                        <div class="d-flex justify-content-between">
+                          <div class="h5 section-title mb-0">Precio de venta</div>
+                          <p class="h5 section-title mb-0">
+                            <strong class="js-input-result" id="js-input-result_price">$&nbsp;682,00</strong>
+                          </p>
+                        </div>
+                      </div>
+                      <button type="button" class="js-btn-clean btn btn-sm btn-secondary mt-3">Nuevo cálculo</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
           </div>
           
-          <div class="card-body">
-            <!-- Fila 1: Low Iron Glass -->
-            <div class="d-flex justify-content-between align-items-center mb-4">
-              <p class="my-auto">Low Iron Glass</p>
-              <input id="securityKeys" class="form-control form-control-sm" type="number" value="0" min="0" />
-            </div>
-            <hr class="horizontal dark">
-        
-            <!-- Fila 2: SMS number -->
-            <div class="d-flex justify-content-between align-items-center mb-4">
-              <p class="my-auto">SMS number</p>
-              <input id="smsNumber" class="form-control form-control-sm" type="number" value="0" min="0" />
-            </div>
-            <hr class="horizontal dark">
-        
-            <!-- Fila 3: Authenticator app -->
-            <div class="d-flex justify-content-between align-items-center mb-4">
-              <p class="my-auto">Authenticator app</p>
-              <input id="authenticatorApp" class="form-control form-control-sm" type="number" value="0" min="0" />
-            </div>
-        
-            <hr class="horizontal dark">
-        
-            <!-- Botón para Sumar -->
-            <div class="d-flex justify-content-center mb-4">
-              <button class="btn btn-lg btn-outline-primary" type="button" onclick="sumValues()">Sumar</button>
-            </div>
-        
-            <!-- Resultado de la Suma -->
-            <div class="d-flex justify-content-center">
-              <p id="sumResult" class="text-secondary text-lg font-weight-bold">Resultado: $0.00</p>
-            </div>
-          </div>
-        
-      </div>
+        </div>
         <!-- Card Accounts -->
         <div class="card mt-4" id="accounts">
           <div class="card-header">
@@ -1596,6 +1619,7 @@
 </div>
 </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="{% static 'assets/js/plugins/quill.min.js' %}"></script>
 <script>
   if (document.getElementById('edit-deschiption-edit')) {
@@ -1676,62 +1700,32 @@
 
 
 <script>
-  document.querySelectorAll('figure.selectable').forEach(figure => {
-    figure.addEventListener('click', () => {
-      // Remueve la clase activa de los otros elementos
-      document.querySelectorAll('figure.selectable').forEach(el => el.classList.remove('active'));
-      // Agrega la clase activa al elemento seleccionado
-      figure.classList.add('active');
+  // Función genérica para manejar eventos de clic y clases activas
+  function addActiveClassHandler(selector) {
+    document.querySelectorAll(selector).forEach(element => {
+      element.addEventListener('click', () => {
+        // Remueve la clase activa de los otros elementos
+        document.querySelectorAll(selector).forEach(el => el.classList.remove('active'));
+        // Agrega la clase activa al elemento seleccionado
+        element.classList.add('active');
+
+        // Realiza acciones adicionales específicas si se requiere
+        if (selector === 'figure.selectable') {
+          clearCanvas();
+        }
+      });
     });
-  });
-  document.querySelectorAll('figure.selectable1').forEach(figure => {
-    figure.addEventListener('click', () => {
-      // Remueve la clase activa de los otros elementos
-      document.querySelectorAll('figure.selectable1').forEach(el => el.classList.remove('active'));
-      // Agrega la clase activa al elemento seleccionado
-      figure.classList.add('active');
-    });
-  });
-  document.querySelectorAll('figure.selectable2').forEach(figure => {
-    figure.addEventListener('click', () => {
-      // Remueve la clase activa de los otros elementos
-      document.querySelectorAll('figure.selectable2').forEach(el => el.classList.remove('active'));
-      // Agrega la clase activa al elemento seleccionado
-      figure.classList.add('active');
-    });
-  });
-  document.querySelectorAll('figure.selectable3').forEach(figure => {
-    figure.addEventListener('click', () => {
-      // Remueve la clase activa de los otros elementos
-      document.querySelectorAll('figure.selectable3').forEach(el => el.classList.remove('active'));
-      // Agrega la clase activa al elemento seleccionado
-      figure.classList.add('active');
-    });
-  });
-  document.querySelectorAll('figure.selectable4').forEach(figure => {
-    figure.addEventListener('click', () => {
-      // Remueve la clase activa de los otros elementos
-      document.querySelectorAll('figure.selectable4').forEach(el => el.classList.remove('active'));
-      // Agrega la clase activa al elemento seleccionado
-      figure.classList.add('active');
-    });
-  });
-  document.querySelectorAll('a.d-block').forEach(link => {
-    link.addEventListener('click', () => {
-      // Remueve la clase activa de los otros enlaces
-      document.querySelectorAll('a.d-block').forEach(el => el.classList.remove('active'));
-      // Agrega la clase activa al enlace seleccionado
-      link.classList.add('active');
-    });
-  });
-  document.querySelectorAll('li.d1-block').forEach(link => {
-    link.addEventListener('click', () => {
-      // Remueve la clase activa de los otros enlaces
-      document.querySelectorAll('li.d1-block').forEach(el => el.classList.remove('active'));
-      // Agrega la clase activa al enlace seleccionado
-      link.classList.add('active');
-    });
-  });
+  }
+
+  // Llamar a la función genérica para cada selector necesario
+  addActiveClassHandler('figure.selectable');
+  addActiveClassHandler('figure.selectable1');
+  addActiveClassHandler('figure.selectable2');
+  addActiveClassHandler('figure.selectable3');
+  addActiveClassHandler('figure.selectable4');
+  addActiveClassHandler('a.d-block');
+  addActiveClassHandler('li.d1-block');
+
   // Selecciona todos los enlaces con la clase 'image-selector'
   document.querySelectorAll('.image-selector').forEach(anchor => {
     anchor.addEventListener('click', (event) => {
@@ -2170,19 +2164,15 @@
   // Evento para habilitar el modo de dibujo al hacer clic en el botón
 
   document.getElementById('drawLineIcon').addEventListener('click', () => {
-   
+
     isDrawing = true; // Activar el modo de dibujo
     points = []; // Reiniciar los puntos para una nueva línea
- 
-});
 
-  // drawLineButton.addEventListener('click', () => {
-  
-  // });
+  });
+
   document.getElementById('clearCanvasIcon').addEventListener('click', () => {
-    console.log('Limpiar Canvas');
     clearCanvas(); // Llama a tu función definida para limpiar el canvas
-});
+  });
 </script>
 <script>
   // Variable global para guardar la imagen
@@ -2221,8 +2211,8 @@
     var ctx = canvas.getContext('2d'); // Obtiene el contexto 2D del canvas
 
     //Crear una nueva imagen y cargarla
-    // var img1 = document.getElementById('selected-image');
-    // img1.id = 'selected-image';
+    var img1 = document.getElementById('selected-image');
+    img1.id = 'selected-image';
     // var img = new Image(); // Crea una nueva instancia de imagen
     // img.src = '{% static "assets/img/1.png" %}'; // Ruta de la imagen que deseas dibujar
 
@@ -2233,4 +2223,51 @@
   };
 
 </script>
+
+<script>
+ // Configuración básica de la escena
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+
+// Crear el renderer con el canvas que ya tienes en el HTML
+const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('three-canvas') });
+renderer.setSize(500, 410);  // Tamaño reducido
+
+// Establecer el color de fondo a blanco
+renderer.setClearColor(0xffffff);  // 0xffffff es el color blanco
+
+// Cargar la textura de la imagen desde Django
+const textureLoader = new THREE.TextureLoader();
+const texture = textureLoader.load("{% static 'assets/img/1.png' %}");  // Cargar la imagen estática
+
+// Crear la geometría y el material del cubo (puerta)
+const geometry = new THREE.BoxGeometry(1, 3, 0.1);  // Dimensiones de la puerta
+const material = new THREE.MeshBasicMaterial({ map: texture });
+const door = new THREE.Mesh(geometry, material);
+scene.add(door);
+
+// Posicionar la cámara más cerca para ver la puerta más pequeña
+camera.position.z = 3;
+
+// Función para animar la puerta girando
+function animate() {
+  requestAnimationFrame(animate);
+
+  // Girar la puerta
+  door.rotation.y += 0.01;
+
+  renderer.render(scene, camera);
+}
+animate();
+
+// Ajustar el tamaño al redimensionar la ventana
+window.addEventListener('resize', () => {
+  renderer.setSize(300, 300);  // Tamaño reducido
+  camera.aspect = 300 / 300;
+  camera.updateProjectionMatrix();
+});
+
+  </script>
+
+
 {% endblock content %}

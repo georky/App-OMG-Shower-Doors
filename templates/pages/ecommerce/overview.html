@@ -1280,56 +1280,46 @@
           
             <!-- Columna del formulario -->
             <div class="col-md-6">
-              <div class="card">
+              <div class="card ">
                 <div class="card-header">
-                  <h5>Información del Producto</h5>
+                  <h5>Cost Breakdown</h5>
                 </div>
                 <div class="card-body pt-0">
-                  <form class="js-sale-calculator-form">
+                  <form class="js-sale-calculator-form ">
                     <fieldset>
-                      <div class="mb-2">
-                        <label for="product_cost">Costo del producto</label>
-                        <div class="row mb-4">
-                          <div class="col-6 d-flex align-items-center">
-                            <i class="fa fa-dollar-sign me-2 custom-color"></i>
-                            <input id="product_cost" name="product_cost" class="form-control border" type="text" placeholder="Ejemplo: 100" required>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-2">
-                        <label for="product_operative_expenses">Gastos operacionales por producto</label>
-                        <div class="row mb-4">
-                          <div class="col-6 d-flex align-items-center">
-                            <i class="fa fa-dollar-sign me-2 custom-color"></i>
-                            <input id="product_operative_expenses" name="product_operative_expenses" class="form-control border" type="text" placeholder="Ejemplo: 50" required>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-2">
-                        <label for="product_estimated_profit">Porcentaje de margen de lucro</label>
-                        <div class="row mb-4">
-                          <div class="col-6 d-flex align-items-center">
-                            <i class="fa fa-dollar-sign me-2 custom-color"></i>
-                            <input id="product_estimated_profit" name="product_estimated_profit" class="form-control border" type="text" placeholder="Ejemplo: 20" required>
-                          </div>
-                        </div>
-                      </div>
+                      <table class="table align-items-center mb-0 border" id="cost-table">
+                        <thead>
+                          <tr>
+                            <th>Descripción</th>
+                            <th>Valor</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        
+                          
+                         
+                        </tbody>
+                      </table>
+                      <br>
+                      <button type="button" id="add-row-btn" class="btn-primary kanban-title-button btn btn-sm ">+</button>
+                      <button type="button" id="remove-row-btn" class="btn-primary kanban-title-button btn btn-sm">--</button>
                     </fieldset>
                     <div class="js-result-preview">
                       <div class="p-4 section-bg-color rounded-3 mt-2 border">
                         <div class="d-flex justify-content-between">
-                          <div class="h5 section-title mb-0">Precio de venta</div>
+                          <div class="h5 section-title mb-0">Precio TOTAL</div>
                           <p class="h5 section-title mb-0">
-                            <strong class="js-input-result" id="js-input-result_price">$&nbsp;682,00</strong>
+                            <strong class="js-input-result" id="js-total-sum">$&nbsp;0.00</strong>
                           </p>
                         </div>
                       </div>
-                      <button type="button" class="js-btn-clean btn btn-sm btn-secondary mt-3">Nuevo cálculo</button>
+                     
                     </div>
                   </form>
                 </div>
               </div>
             </div>
+            
           </div>
           
         </div>
@@ -2268,6 +2258,44 @@ window.addEventListener('resize', () => {
 });
 
   </script>
+<script>
+  function updateTotalSum() {
+    const valueInputs = document.querySelectorAll('.value-input');
+    let total = 0;
+    valueInputs.forEach(input => {
+      const value = parseFloat(input.value);
+      if (!isNaN(value)) {
+        total += value;
+      }
+    });
+    document.getElementById('js-total-sum').textContent = `$ ${total.toFixed(2)}`;
+  }
 
+  document.getElementById('add-row-btn').addEventListener('click', function() {
+    const tableBody = document.querySelector('#cost-table tbody');
+    const newRow = document.createElement('tr');
+    newRow.innerHTML = `
+      <td>
+        <input class="form-control border" type="text" placeholder="Descripción" required>
+      </td>
+      <td>
+        <input class="form-control border value-input" type="number" placeholder="Valor" required>
+      </td>
+    `;
+    tableBody.appendChild(newRow);
+    newRow.querySelector('.value-input').addEventListener('input', updateTotalSum);
+  });
 
+  document.getElementById('remove-row-btn').addEventListener('click', function() {
+    const tableBody = document.querySelector('#cost-table tbody');
+    if (tableBody.rows.length > 0) {
+      tableBody.deleteRow(-1);
+      updateTotalSum();
+    }
+  });
+
+  document.querySelectorAll('.value-input').forEach(input => {
+    input.addEventListener('input', updateTotalSum);
+  });
+</script>
 {% endblock content %}

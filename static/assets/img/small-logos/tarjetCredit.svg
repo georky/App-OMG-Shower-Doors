@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="400" height="250">
+  <!-- Background -->
+  <rect x="0" y="0" width="400" height="250" rx="15" fill="linear-gradient(45deg, #222, #555)"/>
+  
+  <!-- Card Chip -->
+  <rect x="40" y="80" width="50" height="40" rx="5" fill="#d3d3d3" />
+  <rect x="45" y="85" width="40" height="30" rx="3" fill="#888" />
+
+  <!-- Card Number -->
+  <text x="40" y="150" font-family="Arial, sans-serif" font-size="20" fill="#fff">1234 5678 9012 3456</text>
+
+  <!-- Card Holder Name -->
+  <text x="40" y="180" font-family="Arial, sans-serif" font-size="16" fill="#fff">CARD HOLDER</text>
+
+  <!-- Expiry Date -->
+  <text x="300" y="180" font-family="Arial, sans-serif" font-size="16" fill="#fff">12/25</text>
+
+  <!-- Logo -->
+  <circle cx="360" cy="50" r="20" fill="orange" />
+  <circle cx="330" cy="50" r="20" fill="red" />
+</svg>

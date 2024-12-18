@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" width="400" height="200">
+  <!-- Background Rectangle for Bill -->
+  <rect x="10" y="10" width="380" height="180" rx="15" fill="#85bb65" stroke="#3d8038" stroke-width="5"/>
+
+  <!-- Border Decorations -->
+  <rect x="20" y="20" width="360" height="160" rx="10" fill="none" stroke="#3d8038" stroke-width="3" />
+
+  <!-- Central Dollar Sign -->
+  <text x="200" y="110" font-family="Arial, sans-serif" font-size="60" fill="#3d8038" text-anchor="middle">$</text>
+
+  <!-- Serial Number -->
+  <text x="50" y="40" font-family="Courier, monospace" font-size="12" fill="#333">A123456789A</text>
+  <text x="350" y="40" font-family="Courier, monospace" font-size="12" fill="#333" text-anchor="end">A123456789A</text>
+
+  <!-- Denomination -->
+  <text x="50" y="180" font-family="Arial, sans-serif" font-size="20" fill="#3d8038">ONE</text>
+  <text x="350" y="180" font-family="Arial, sans-serif" font-size="20" fill="#3d8038" text-anchor="end">ONE</text>
+
+  <!-- Oval Decoration -->
+  <ellipse cx="200" cy="110" rx="80" ry="50" fill="none" stroke="#3d8038" stroke-width="2" />
+
+  <!-- Small Text -->
+  <text x="200" y="140" font-family="Arial, sans-serif" font-size="12" fill="#333" text-anchor="middle">UNITED STATES OF CHATGPT</text>
+</svg>
+
